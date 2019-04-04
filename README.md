@@ -97,7 +97,8 @@ You can see all information of deploying steps on console.
 
 ## Credits
 
-* Original idea of base code by [Azure Voting App] (https://github.com/Azure-Samples/azure-voting-app-redis).
+* Original idea of base code shell script by [Azure Voting App](https://github.com/Azure-Samples/azure-voting-app-redis).
+* Original idea of base code electron app by [Electron Run Shell Example](https://github.com/martinjackson/electron-run-shell-example).
 
 ## Contributors
 
