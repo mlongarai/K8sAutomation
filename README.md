@@ -1,7 +1,5 @@
 # K8sAutomation 
 
-[![k8sautomation.gif](https://s2.gifyu.com/images/k8sautomation.gif)](https://gifyu.com/image/3rp1)
-
 ## Overview
 
 Simplify building your Azure Kubernetes Service (AKS) cloud infrastructure. Use this app to provision and deploy a kubernetes cluster and and build your microservice architecture quickly and easily.
@@ -59,7 +57,7 @@ OR
 
 ### Provisioning
 
-![Provisioning](https://i.imgur.com/6pwdNCD.png)
+![Provisioning](https://i.imgur.com/u923YSu.png)
 
 * Fill out:
 
@@ -81,7 +79,7 @@ You can see all information of provisioning steps on console.
 
 ### Deploying
 
-![Deploying](https://i.imgur.com/cpqtyI8.png)
+![Deploying](https://i.imgur.com/irx2NQI.png)
 
 For this step you need to use some example like [api-mongodb-jenkins-example](https://github.com/mlongarai/) for deploy pods, services, deployments, etc.
 
