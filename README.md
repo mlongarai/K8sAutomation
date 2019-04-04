@@ -1,8 +1,6 @@
 # K8sAutomation for Azure Kubernetes Service (AKS)
 
-[![k8sautomation.th.gif](https://s2.gifyu.com/images/k8sautomation.th.gif)](https://gifyu.com/image/3rp1)
-
-[![k8sautomation.md.gif](https://s2.gifyu.com/images/k8sautomation.md.gif)](https://gifyu.com/image/3rp1)
+[![k8sautomation.gif](https://s2.gifyu.com/images/k8sautomation.gif)](https://gifyu.com/image/3rp1)
 
 ## Overview
 
