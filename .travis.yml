@@ -1,0 +1,20 @@
+os:
+- osx
+dist: xenial
+osx_image: xcode8
+language: node_js
+node_js:
+- '6'
+- '8'
+- '10'
+cache:
+- apt: true
+- directories:
+  - "node_modules"
+  - "$HOME/.electron"
+install:
+- npm install
+- npm update
+branches:
+  only:
+  - master
