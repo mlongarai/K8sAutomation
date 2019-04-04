@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>K8s Automation</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/font-awesome.min.css" rel="stylesheet">
+	<link href="css/datepicker3.css" rel="stylesheet">
+	<link href="css/styles.css" rel="stylesheet">
+	
+	<!--Custom Font-->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+	<!--[if lt IE 9]>
+	<script src="js/html5shiv.js"></script>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse"><span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span></button>
+				<a class="navbar-brand" href="#"><span>K8s</span>Automation</a>
+
+			</div>
+		</div><!-- /.container-fluid -->
+	</nav>
+	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+		<div class="profile-sidebar">
+			<div class="profile-userpic">
+				<img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt="">
+			</div>
+			<div class="profile-usertitle">
+				<div class="profile-usertitle-name">Username</div>
+				<div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="divider"></div>
+		
+		<ul class="nav menu">
+			<li><a href="index.html"><em class="fa fa-toggle-off">&nbsp;</em>Provisioning</a></li>
+			<li class="active"><a href="deploy.html"><em class="fa fa-clone">&nbsp;</em>Deploying</a></li>
+		</ul>
+	</div><!--/.sidebar-->
+		
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+		<div class="row">
+			<ol class="breadcrumb">
+				<li><a href="#">
+					<em class="fa fa-home"></em>
+				</a></li>
+				<li class="active">K8s Automation</li>
+			</ol>
+		</div><!--/.row-->
+		
+		<div class="row">
+			<div class="col-lg-12">
+				
+				
+				
+				<div class="panel panel-default">
+					<div class="panel-heading">Deploying</div>
+					<div class="panel-body">
+						<div class="col-md-6">
+							<form role="form" id="formAks" name="formAks">
+								<div class="form-group">
+									<label>Azure Resource Group</label>
+									<input class="form-control" placeholder="Enter your resource group name" name="resource_group" id="resource_group" maxlength="14" size="10" onblur="javascript:validate(this)">
+								</div>
+								<div class="form-group">
+									<label>Kubernetes Cluster</label>
+									<input class="form-control" placeholder="Your AKS cluster name" name="aks_name" id="aks_name"
+										maxlength="14" size="10" onblur="javascript:validate(this)">
+								</div>
+								<div class="form-group">
+									<label>Application Name</label>
+									<input class="form-control" placeholder="Your app name" name="app_name" id="app_name"
+										maxlength="14" size="10" onblur="javascript:validate(this)">
+								</div>
+								<div class="form-group">
+									<label>Service Name</label>
+									<input class="form-control" placeholder="Your service name of the app" name="aks_service"
+										id="aks_service" maxlength="14" size="10" onblur="javascript:validate(this)">
+								</div>
+								<div class="form-group">
+									<label>DNS Suffix</label>
+									<input class="form-control" placeholder="Your DNS suffix for the project" name="dns_name_suffix" id="dns_name_suffix"
+										maxlength="14" size="10" onblur="javascript:validate(this)">
+								</div>
+								<div class="form-group">
+									<label>Azure Location Region</label>
+									<input class="form-control" placeholder="Enter your location region" name="aks_location" id="aks_location" maxlength="14"
+										size="10" onblur="javascript:validate(this)">
+								
+								</div>
+									<div class="form-group">
+										<button type="button" class="btn btn-primary" onclick="javascript:ExecShell();">Submit</button>
+										<button type="reset" class="btn btn-default">Reset</button>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group" >
+										<label>Console</label>
+										<textarea
+											style=" height: 389px; background-color: #000; border: 1px solid #000; color: #00ff00; padding: 8px; font-family: courier new; "
+											class="form-control no-gray" id="command-output" disabled="true"></textarea>
+										<div id="status"></div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div><!-- /.panel-->
+			</div><!-- /.col-->
+			<div class="col-sm-12">
+				<p class="back-link">Lumino Theme by <a href="https://www.medialoot.com">Medialoot</a></p>
+			</div>
+		</div><!-- /.row -->
+	</div><!--/.main-->
+	
+<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/chart.min.js"></script>
+	<script src="js/chart-data.js"></script>
+	<script src="js/easypiechart.js"></script>
+	<script src="js/easypiechart-data.js"></script>
+	<script src="js/bootstrap-datepicker.js"></script>
+	<script src="js/custom.js"></script>
+	<script src="./gui-funct-phase2.js"></script>
+
+	<script> 
+	function getCommandOutput() { return document.getElementById("command-output"); };
+	function getStatus() { return document.getElementById("status"); };
+
+	function validate(obj) {
+			if (obj.value.trim().length >= 5) {
+				obj.parentNode.className="form-group has-success";
+			} else {
+				obj.parentNode.className = "form-group has-error";
+			}
+		}
+		
+	function ExecShell() {
+
+			resource_group = document.getElementById("resource_group").value;
+			aks_name = document.getElementById("aks_name").value;
+			app_name = document.getElementById("app_name").value;
+			aks_service = document.getElementById("aks_service").value;
+			dns_name_suffix = document.getElementById("dns_name_suffix").value;
+			aks_location = document.getElementById("aks_location").value;
+
+			if (resource_group.trim().length < 5) {
+				//document.getElementById("li_resource_group").style.border = "1px solid Red";
+				document.getElementById("resource_group").focus();
+				alert('Fill out Azure Resource Group');
+			} else if (aks_name.trim().length < 5) {
+				//document.getElementById("li_aks_name").style.border = "1px solid Red";
+				document.getElementById("aks_name").focus();
+				alert('Fill out Kubernetes Cluster');
+			} else if (app_name.trim().length < 5) {
+				//document.getElementById("li_app_name").style.border = "1px solid Red";
+				document.getElementById("app_name").focus();
+				alert('Fill out App name');
+			} else if (aks_service.trim().length < 5) {
+				//document.getElementById("li_dns_name_suffix").style.border = "1px solid Red";
+				document.getElementById("aks_service").focus();
+				alert('Fill out aks_service Name');
+			} else if (dns_name_suffix.trim().length < 5) {
+				//document.getElementById("li_dns_name_suffix").style.border = "1px solid Red";
+				document.getElementById("dns_name_suffix").focus();
+				alert('Fill out DNS Suffix');
+			} else if (aks_location.trim().length < 5) {
+				//document.getElementById("li_dns_name_suffix").style.border = "1px solid Red";
+				document.getElementById("aks_location").focus();
+				alert('Fill out DNS Suffix');
+			} else {
+				backgroundProcess(resource_group, aks_name, app_name, aks_service, dns_name_suffix, aks_location);
+			}
+
+		}
+	</script>
+</body>
+</html>
