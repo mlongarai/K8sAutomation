@@ -135,7 +135,7 @@
 								</div>
 								<div class="form-group">
 									<label>File input</label>
-									<input type="file" name="aks_file" id="aks_file" multiple>
+									<input type="file" name="aks_files" id="aks_files" multiple>
 									<p class="help-block">YAML and JSON files.</p>
 								</div>
 								<div class="form-group">
@@ -183,7 +183,7 @@
 			aks_service = document.getElementById("aks_service").value;
 			dns_name_suffix = document.getElementById("dns_name_suffix").value;
 			aks_location = document.getElementById("aks_location").value;
-			aks_file = document.getElementById("aks_file").files[0].path;
+			aks_files = document.getElementById("aks_files").files[0].path;
 
 			if (resource_group.trim().length < 5) {
 				//document.getElementById("li_resource_group").style.border = "1px solid Red";
@@ -206,7 +206,7 @@
 				document.getElementById("dns_name_suffix").focus();
 				alert('Fill out DNS Suffix');
 			} else {
-				backgroundProcess(resource_group, aks_name, app_name, aks_service, dns_name_suffix, aks_location, aks_file);
+				backgroundProcess(resource_group, aks_name, app_name, aks_service, dns_name_suffix, aks_location, aks_files);
 			}
 
 		}

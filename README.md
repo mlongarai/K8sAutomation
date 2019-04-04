@@ -132,7 +132,7 @@ You can see all information of deploying steps on console.
 
 ## Contributors
 
-A special thanks to my friends who helped me heal complex architecture and software development issues in this projec.
+Special thanks to my friends who helped me solve complex architectural and software development problems in this project.
 
 * @[eduth](https://github.com/eduth)
 

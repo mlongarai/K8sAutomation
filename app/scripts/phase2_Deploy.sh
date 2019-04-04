@@ -23,13 +23,13 @@ do
       d ) aks_service="$OPTARG" ;;
       e ) dns_name_suffix="$OPTARG" ;;
       f ) aks_location="$OPTARG" ;;
-      g ) aks_file="$OPTARG" ;;
+      g ) aks_files="$OPTARG" ;;
       ? ) helpFunction ;; # Print helpFunction in case parameter is non-existent
    esac
 done
 
 # Print helpFunction in case parameters are empty
-if [ -z "$resource_group" ] || [ -z "$aks_name" ] || [ -z "$app_name" ] || [ -z "$aks_service" ] || [ -z "$dns_name_suffix" ] || [ -z "$aks_location" ] || [ -z "$aks_file" ]
+if [ -z "$resource_group" ] || [ -z "$aks_name" ] || [ -z "$app_name" ] || [ -z "$aks_service" ] || [ -z "$dns_name_suffix" ] || [ -z "$aks_location" ] || [ -z "$aks_files" ]
 then
    echo "Some or all of the parameters are empty";
    helpFunction
@@ -62,14 +62,16 @@ if [[ "$(kubectl get svc --namespace default kubernetes -o jsonpath='{.metadata.
     /usr/local/bin/kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard
 fi
 
-#SAVEIFS="$IFS"
-#IFS=$(echo -en "\n\b")
+echo "PRIMEIRO: ${aks_files[0]}"
+echo "SEGUNDO: ${aks_files[1]}"
 
-# for config in "$DIR"*.json; do
-    echo "Apply $aks_file"
-    /usr/local/bin/kubectl apply -f "$aks_file" --kubeconfig "$kubeconfig"
-# done
-#IFS="$SAVEIFS"
+SAVEIFS="$IFS"
+IFS=$(echo -en "\n\b")
+for i in ${aks_files[@]} do
+    echo "Apply $i"
+    echo /usr/local/bin/kubectl apply -f "$i" --kubeconfig "$kubeconfig"
+done
+IFS="$SAVEIFS"
 
 function assign_dns {
     aks_service="$1"
