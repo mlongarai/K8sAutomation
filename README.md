@@ -17,7 +17,7 @@ Login Azure CLI
    az login
    ```
 
-Select the demos subscription
+* Select the demos subscription
 
    ```sh
    az account set --subscription "<subscription-id>"
@@ -25,33 +25,68 @@ Select the demos subscription
 
 ## Getting Started
 
-### Deploying a new AKS infrastructure
+### Creating a new AKS infrastructure
 
-### Download
+### Download and Run
 
-Latest Release: 
+* Get latest Release: 
 
-or
+OR
+
+* Do yourself: 
 
    ```Github
-   git clone https://github.com/mlongarai/K8Automation.git
-   cd K8sAutomation
-   npm install
-   npm start
-   ```
-
-### Run
-
-```Github
    git clone https://github.com/mlongarai/K8sAutomation.git
    cd K8sAutomation
    npm install
    npm start
    ```
 
-### Examples of architecture scenarios
+### Provisioning
+
+* Fill out:
+
+   * Name of new Resource Group of Azure
+   * Name of new Azure Container Registry
+   * Name of new Cluster K8s
+   * Number of Cluster Nodes
+   * Name of Location
+   * Name of VM Size 
+
+And press Apply.
+
+* Console:
+
+You can see all information of provisioning steps on console.
+
+### Deploying
+
+For this step you need to use some example like [api-mongodb-jenkins-example](https://github.com/mlongarai/) for deploy pods, services, deployments, etc.
+
+* Fill out:
+
+   * Name of new Resource Group of Azure
+   * Name of new Cluster K8s
+   * Name of new App
+   * Name of new Service
+   * Name of new DNS suffix
+   * Name of location provisioned
+
+And press Apply.
+
+* Console:
+
+You can see all information of deploying steps on console.
+
+### Monitoring your Infrastructure
+
+* [Azure Portal](http://portal.azure.com/)
+* [Kubernetes Dashboard](https://github.com/kubernetes/dashboard)
+
+### Examples of K8s architecture scenarios
 
 * [api-mongodb-jenkins-example](https://github.com/mlongarai/): API for Documentation using Node.js + MongoDB + Jenkins for CI/CD
+
 
 ### Deleting the AKS infrastructure (and all associated resources)
 
@@ -60,11 +95,11 @@ or
    az group delete -n MyResourceGroup --no-wait
    ```
 
-### Credits
+## Credits
 
-Original idea of base code by [Azure Voting App] (https://github.com/Azure-Samples/azure-voting-app-redis).
+* Original idea of base code by [Azure Voting App] (https://github.com/Azure-Samples/azure-voting-app-redis).
 
-### Contributors
+## Contributors
 
 A special thanks to my friends who helped me heal complex architecture and software development issues in this projec.
 
