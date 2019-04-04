@@ -15,7 +15,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "dist": "electron-builder",
+    "build:prod": "npm run build -- -c production",
+    "release:mac": "npm run build:prod && npx electron-builder build --mac -p always"
   },
   "keywords": [
     "electron",
