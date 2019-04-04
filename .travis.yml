@@ -1,20 +1,32 @@
-os:
-- osx
-dist: xenial
-osx_image: xcode8
+osx_image: xcode10.2
+
+sudo: required
+
 language: node_js
-node_js:
-- '6'
-- '8'
-- '10'
+node_js: "11"
+
+os:
+  - osx
+
+env:
+  global:
+    - ELECTRON_CACHE=$HOME/.cache/electron
+    - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
+
 cache:
-- apt: true
-- directories:
-  - "node_modules"
-  - "$HOME/.electron"
+  yarn: true
+  directories:
+    - $HOME/.cache/electron
+    - $HOME/.cache/electron-builder
+    - $HOME/.npm/_prebuilds
+
+addons:
+  chrome: stable # have Travis install chrome stable.
+
 install:
-- npm install
-- npm update
-branches:
-  only:
-  - master
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install yarn; fi
+  - yarn
+
+script:
+- echo "Deploy mac version to GitHub"
+- if [[ "$TRAVIS_BRANCH" == "master" ]] && [[ "$TRAVIS_OS_NAME" == "osx" ]]; then yarn release:mac; fi
