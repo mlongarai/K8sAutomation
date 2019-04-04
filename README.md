@@ -6,6 +6,7 @@ This is a desktop app was built with [Electron](http://electronjs.org). This app
 
 Use this app to provision and deploy a kubernetes cluster and and build your microservice architecture with your help.
 
+
 This project proposes to build a set of routines to accelerate the creation of an ecosystem in the flow of software development, enabling the automation of the construction of an initial environment for approval and testing of the project, seeking to facilitate the configuration, management, and monitoring of the environments through Kubernetes, container orchestrator, provides stability, scalability and centralized maintenance.
 
 ### Requirements
@@ -44,6 +45,8 @@ OR
 
 ### Provisioning
 
+![Provisioning](https://i.imgur.com/6pwdNCD.png)
+
 * Fill out:
 
    * Name of new Resource Group of Azure
@@ -60,6 +63,8 @@ And press Apply.
 You can see all information of provisioning steps on console.
 
 ### Deploying
+
+![Deploying](https://i.imgur.com/cpqtyI8.png)
 
 For this step you need to use some example like [api-mongodb-jenkins-example](https://github.com/mlongarai/) for deploy pods, services, deployments, etc.
 
