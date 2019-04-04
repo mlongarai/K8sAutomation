@@ -22,14 +22,14 @@ do
       b ) registry_name="$OPTARG" ;;
       c ) aks_name="$OPTARG" ;;
       d ) nodes="$OPTARG" ;;
-      e ) location="$OPTARG" ;;
+      e ) aks_location="$OPTARG" ;;
       f ) vmsize="$OPTARG" ;;
       ? ) helpFunction ;; # Print helpFunction in case parameter is non-existent
    esac
 done
 
 # Print helpFunction in case parameters are empty
-if [ -z "$resource_group" ] || [ -z "$registry_name" ] || [ -z "$aks_name" ] || [ -z "$nodes" ] || [ -z "$location" ] || [ -z "$vmsize" ]
+if [ -z "$resource_group" ] || [ -z "$registry_name" ] || [ -z "$aks_name" ] || [ -z "$nodes" ] || [ -z "$aks_location" ] || [ -z "$vmsize" ]
 then
    echo "Some or all of the parameters are empty";
    helpFunction
@@ -51,3 +51,7 @@ fi
 
 /usr/local/bin/kubectl get svc
 /usr/local/bin/kubectl options
+
+echo $nodes
+echo $aks_location
+echo $vmsize

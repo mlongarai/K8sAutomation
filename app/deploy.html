@@ -8,6 +8,7 @@
 	<link href="css/font-awesome.min.css" rel="stylesheet">
 	<link href="css/datepicker3.css" rel="stylesheet">
 	<link href="css/styles.css" rel="stylesheet">
+	<script src="js/jquery-1.11.1.min.js"></script>
 	
 	<!--Custom Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -17,6 +18,10 @@
 	<![endif]-->
 </head>
 <body>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/custom.js"></script>
+	<script src="./gui-funct-phase2.js"></script>
+
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -92,45 +97,45 @@
 								<div class="form-group">
 									<label>Azure Location Region</label>
 									<div class="form-group">
-										<select class="form-control">
-											<option name="aks_location" id="aks_location">eastasia</option>
-											<option name="aks_location" id="aks_location">southeastasia</option>
-											<option name="aks_location" id="aks_location">centralus</option>
-											<option name="aks_location" id="aks_location">eastus</option>
-											<option name="aks_location" id="aks_location">eastus2</option>
-											<option name="aks_location" id="aks_location">westus</option>
-											<option name="aks_location" id="aks_location">northcentralus</option>
-											<option name="aks_location" id="aks_location">southcentralus</option>
-											<option name="aks_location" id="aks_location">northeurope</option>
-											<option name="aks_location" id="aks_location">westeurope</option>
-											<option name="aks_location" id="aks_location">japanwest</option>
-											<option name="aks_location" id="aks_location">japaneast</option>
-											<option name="aks_location" id="aks_location">brazilsouth</option>
-											<option name="aks_location" id="aks_location">australiaeast</option>
-											<option name="aks_location" id="aks_location">australiasoutheast</option>
-											<option name="aks_location" id="aks_location">southindia</option>
-											<option name="aks_location" id="aks_location">centralindia</option>
-											<option name="aks_location" id="aks_location">westindia</option>
-											<option name="aks_location" id="aks_location">canadacentral</option>
-											<option name="aks_location" id="aks_location">canadaeast</option>
-											<option name="aks_location" id="aks_location">uksouth</option>
-											<option name="aks_location" id="aks_location">ukwest</option>
-											<option name="aks_location" id="aks_location">westcentralus</option>
-											<option name="aks_location" id="aks_location">westus2</option>
-											<option name="aks_location" id="aks_location">koreacentral</option>
-											<option name="aks_location" id="aks_location">koreasouth</option>
-											<option name="aks_location" id="aks_location">francecentral</option>
-											<option name="aks_location" id="aks_location">francesouth</option>
-											<option name="aks_location" id="aks_location">australiacentral</option>
-											<option name="aks_location" id="aks_location">australiacentral2</option>
-											<option name="aks_location" id="aks_location">southafricanorth</option>
-											<option name="aks_location" id="aks_location">southafricawest</option>
+										<select class="form-control" name="aks_location" id="aks_location">
+											<option>eastasia</option>
+											<option>southeastasia</option>
+											<option>centralus</option>
+											<option selected="selected" >eastus</option>
+											<option>eastus2</option>
+											<option>westus</option>
+											<option>northcentralus</option>
+											<option>southcentralus</option>
+											<option>northeurope</option>
+											<option>westeurope</option>
+											<option>japanwest</option>
+											<option>japaneast</option>
+											<option>brazilsouth</option>
+											<option>australiaeast</option>
+											<option>australiasoutheast</option>
+											<option>southindia</option>
+											<option>centralindia</option>
+											<option>westindia</option>
+											<option>canadacentral</option>
+											<option>canadaeast</option>
+											<option>uksouth</option>
+											<option>ukwest</option>
+											<option>westcentralus</option>
+											<option>westus2</option>
+											<option>koreacentral</option>
+											<option>koreasouth</option>
+											<option>francecentral</option>
+											<option>francesouth</option>
+											<option>australiacentral</option>
+											<option>australiacentral2</option>
+											<option>southafricanorth</option>
+											<option>southafricawest</option>
 										</select>
 									</div>
 								</div>
 								<div class="form-group">
 									<label>File input</label>
-									<input type="file" name="name" multiple>
+									<input type="file" name="aks_file" id="aks_file" multiple>
 									<p class="help-block">YAML and JSON files.</p>
 								</div>
 								<div class="form-group">
@@ -157,16 +162,6 @@
 			</div>
 		</div><!-- /.row -->
 	</div><!--/.main-->
-	
-<script src="js/jquery-1.11.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/chart.min.js"></script>
-	<script src="js/chart-data.js"></script>
-	<script src="js/easypiechart.js"></script>
-	<script src="js/easypiechart-data.js"></script>
-	<script src="js/bootstrap-datepicker.js"></script>
-	<script src="js/custom.js"></script>
-	<script src="./gui-funct-phase2.js"></script>
 
 	<script> 
 	function getCommandOutput() { return document.getElementById("command-output"); };
@@ -188,6 +183,7 @@
 			aks_service = document.getElementById("aks_service").value;
 			dns_name_suffix = document.getElementById("dns_name_suffix").value;
 			aks_location = document.getElementById("aks_location").value;
+			aks_file = document.getElementById("aks_file").files[0].path;
 
 			if (resource_group.trim().length < 5) {
 				//document.getElementById("li_resource_group").style.border = "1px solid Red";
@@ -209,12 +205,8 @@
 				//document.getElementById("li_dns_name_suffix").style.border = "1px solid Red";
 				document.getElementById("dns_name_suffix").focus();
 				alert('Fill out DNS Suffix');
-			} else if (aks_location.trim().length < 5) {
-				//document.getElementById("li_dns_name_suffix").style.border = "1px solid Red";
-				document.getElementById("aks_location").focus();
-				alert('Fill out DNS Suffix');
 			} else {
-				backgroundProcess(resource_group, aks_name, app_name, aks_service, dns_name_suffix, aks_location);
+				backgroundProcess(resource_group, aks_name, app_name, aks_service, dns_name_suffix, aks_location, aks_file);
 			}
 
 		}

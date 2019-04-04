@@ -21,7 +21,7 @@ function showOS() {
       appendOutput("Linux Detected.")
 }
 
-function backgroundProcess(resource_group, aks_name, app_name, aks_service, dns_name_suffix, aks_location) {
+function backgroundProcess(resource_group, aks_name, app_name, aks_service, dns_name_suffix, aks_location, aks_file) {
     const process = require('child_process');   // The power of Node.JS
 
   //showOS();
@@ -30,7 +30,7 @@ function backgroundProcess(resource_group, aks_name, app_name, aks_service, dns_
   var cmd = __dirname + '/scripts/' + 'phase2_Deploy.sh';
     console.log('cmd:', cmd);
   
-  var child = process.spawn(cmd, ['-a ' + resource_group, '-b ' + aks_name, '-c ' + app_name, '-d ' + aks_service, '-e ' + dns_name_suffix, '-f ' + aks_location]);
+  var child = process.spawn(cmd, ['-a ' + resource_group, '-b ' + aks_name, '-c ' + app_name, '-d ' + aks_service, '-e ' + dns_name_suffix, '-f ' + aks_location, '-g ' + aks_file]);
 
     child.on('error', function(err) {
       appendOutput('stderr: <'+err+'>' );
@@ -50,6 +50,6 @@ function backgroundProcess(resource_group, aks_name, app_name, aks_service, dns_
         else
           setStatus('child process exited with code ' + code);
 
-        getCommandOutput().style.background = "DarkGray";
+      getCommandOutput().style.background = "Dark";
     });
 };

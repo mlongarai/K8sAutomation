@@ -50,6 +50,7 @@ function backgroundProcess(resource_group, registry_name, aks_name, nodes, aks_l
         else
           setStatus('child process exited with code ' + code);
 
-        getCommandOutput().style.background = "DarkGray";
+        getCommandOutput().style.background = "Dark";
+        //getCommandOutput().style.background = "DarkGray";
     });
 };
