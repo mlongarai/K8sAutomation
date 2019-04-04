@@ -31,7 +31,7 @@ Login Azure CLI
 
 ### Download and Run
 
-* Get latest Release: 
+* Get latest Release: [Latest](https://github.com/mlongarai/K8sAutomation/releases/latest)
 
 OR
 
