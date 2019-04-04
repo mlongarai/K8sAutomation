@@ -4,25 +4,38 @@
 
 ## Overview
 
-This is a desktop app was built with [Electron](http://electronjs.org). This app works only macOS operating system.
+Simplify building your cloud infrastructure. Use this app to provision and deploy a kubernetes cluster and and build your microservice architecture quickly and easily.
 
-Use this app to provision and deploy a kubernetes cluster and and build your microservice architecture with your help.
+This is a desktop app was built with [Electron](http://electronjs.org). This app works only macOS operating system.
 
 This project proposes to build a set of routines to accelerate the creation of an ecosystem in the flow of software development, enabling the automation of the construction of an initial environment for approval and testing of the project, seeking to facilitate the configuration, management, and monitoring of the environments through Kubernetes, container orchestrator, provides stability, scalability and centralized maintenance.
 
 ### Requirements
 
-* Open the terminal and write:
-Login Azure CLI
+* Install Azure CLI:  [Azure CLI for macOS](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-macos?view=azure-cli-latest)
+* Install kubectl:  [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+
+OR
+
+* You can install via brew:
+
+   ```Azure CLI
+   brew install azure-cli
+   ```
+   ```kubectl
+   brew install kubernetes-cli
+   ```
+* Check on terminal:
+
+   ```Check instalation
+   az --version
+   kubectl version
+   ```
+
+* Login Azure Subscription
 
    ```sh
    az login
-   ```
-
-* Select the demos subscription
-
-   ```sh
-   az account set --subscription "<subscription-id>"
    ```
 
 ## Getting Started
@@ -55,7 +68,10 @@ OR
    * Name of new Cluster K8s
    * Number of Cluster Nodes
    * Name of Location
+      * [Region availability](https://docs.microsoft.com/en-us/azure/aks/container-service-quotas)
    * Name of VM Size 
+      * [Size Spec](https://docs.microsoft.com/en-us/azure/cloud-services/cloud-services-sizes-specs)
+
 
 And press Apply.
 
@@ -77,6 +93,8 @@ For this step you need to use some example like [api-mongodb-jenkins-example](ht
    * Name of new Service
    * Name of new DNS suffix
    * Name of location provisioned
+      * List [Quotas and region availability for Azure Kubernetes Service (AKS)](https://docs.microsoft.com/en-us/azure/aks/container-service-quotas)
+      
 
 And press Apply.
 
@@ -94,6 +112,11 @@ You can see all information of deploying steps on console.
 * [api-mongodb-jenkins-example](https://github.com/mlongarai/): API for Documentation using Node.js + MongoDB + Jenkins for CI/CD
 
 
+### Terminal Experts
+
+* [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/ext/aks-preview/aks?view=azure-cli-latest)
+* [kubectl Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
+
 ### Deleting the AKS infrastructure (and all associated resources)
 
 * Open the terminal and write:
@@ -105,6 +128,7 @@ You can see all information of deploying steps on console.
 
 * Original idea of base code shell script by [Azure Voting App](https://github.com/Azure-Samples/azure-voting-app-redis).
 * Original idea of base code electron app by [Electron Run Shell Example](https://github.com/martinjackson/electron-run-shell-example).
+* Original idea of base code bootstrap by [Medialoot](https://medialoot.com/themes/).
 
 ## Contributors
 

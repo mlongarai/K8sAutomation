@@ -31,12 +31,9 @@
 	</nav>
 	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 		<div class="profile-sidebar">
-			<div class="profile-userpic">
-				<img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt="">
-			</div>
 			<div class="profile-usertitle">
-				<div class="profile-usertitle-name">Username</div>
-				<div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
+				<div class="profile-usertitle-name">Azure Subscription</div>
+				<div class="profile-usertitle-status"><span class="indicator label-success"></span>status</div>
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -54,7 +51,7 @@
 				<li><a href="#">
 					<em class="fa fa-home"></em>
 				</a></li>
-				<li class="active">K8s Automation</li>
+				<li class="active">Deploying</li>
 			</ol>
 		</div><!--/.row-->
 		
@@ -94,14 +91,52 @@
 								</div>
 								<div class="form-group">
 									<label>Azure Location Region</label>
-									<input class="form-control" placeholder="Enter your location region" name="aks_location" id="aks_location" maxlength="14"
-										size="10" onblur="javascript:validate(this)">
-								
-								</div>
 									<div class="form-group">
-										<button type="button" class="btn btn-primary" onclick="javascript:ExecShell();">Apply</button>
-										<button type="reset" class="btn btn-default">Reset</button>
+										<select class="form-control">
+											<option name="aks_location" id="aks_location">eastasia</option>
+											<option name="aks_location" id="aks_location">southeastasia</option>
+											<option name="aks_location" id="aks_location">centralus</option>
+											<option name="aks_location" id="aks_location">eastus</option>
+											<option name="aks_location" id="aks_location">eastus2</option>
+											<option name="aks_location" id="aks_location">westus</option>
+											<option name="aks_location" id="aks_location">northcentralus</option>
+											<option name="aks_location" id="aks_location">southcentralus</option>
+											<option name="aks_location" id="aks_location">northeurope</option>
+											<option name="aks_location" id="aks_location">westeurope</option>
+											<option name="aks_location" id="aks_location">japanwest</option>
+											<option name="aks_location" id="aks_location">japaneast</option>
+											<option name="aks_location" id="aks_location">brazilsouth</option>
+											<option name="aks_location" id="aks_location">australiaeast</option>
+											<option name="aks_location" id="aks_location">australiasoutheast</option>
+											<option name="aks_location" id="aks_location">southindia</option>
+											<option name="aks_location" id="aks_location">centralindia</option>
+											<option name="aks_location" id="aks_location">westindia</option>
+											<option name="aks_location" id="aks_location">canadacentral</option>
+											<option name="aks_location" id="aks_location">canadaeast</option>
+											<option name="aks_location" id="aks_location">uksouth</option>
+											<option name="aks_location" id="aks_location">ukwest</option>
+											<option name="aks_location" id="aks_location">westcentralus</option>
+											<option name="aks_location" id="aks_location">westus2</option>
+											<option name="aks_location" id="aks_location">koreacentral</option>
+											<option name="aks_location" id="aks_location">koreasouth</option>
+											<option name="aks_location" id="aks_location">francecentral</option>
+											<option name="aks_location" id="aks_location">francesouth</option>
+											<option name="aks_location" id="aks_location">australiacentral</option>
+											<option name="aks_location" id="aks_location">australiacentral2</option>
+											<option name="aks_location" id="aks_location">southafricanorth</option>
+											<option name="aks_location" id="aks_location">southafricawest</option>
+										</select>
 									</div>
+								</div>
+								<div class="form-group">
+									<label>File input</label>
+									<input type="file" name="name" multiple>
+									<p class="help-block">YAML and JSON files.</p>
+								</div>
+								<div class="form-group">
+									<button type="button" class="btn btn-primary" onclick="javascript:ExecShell();">Apply</button>
+									<button type="reset" class="btn btn-default">Reset</button>
+								</div>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group" >
