@@ -66,9 +66,14 @@ Original idea of base code by [Azure Voting App] (https://github.com/Azure-Sampl
 
 ### Contributors
 
-a special thanks to my friends who helped me heal complex architecture and software development issues in this project.
+A special thanks to my friends who helped me heal complex architecture and software development issues in this projec.
 
-* [eduth] (https://github.com/eduth)
+* @[eduth](https://github.com/eduth)
 
 
-## “Thank you to all who have contributed in this great work”
+<p align="center">
+  <br>
+  <br>
+  <b>“Thank you to all who have contributed in this great work”</b><br>
+  <br><br>
+</p>
