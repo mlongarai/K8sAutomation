@@ -1,11 +1,12 @@
 # K8sAutomation for Azure Kubernetes Service (AKS)
 
+![K8sAutomation](https://media.giphy.com/media/M9Hm0v9bIpUkv1yh9x/giphy.gif)
+
 ## Overview
 
 This is a desktop app was built with [Electron](http://electronjs.org). This app works only macOS operating system.
 
 Use this app to provision and deploy a kubernetes cluster and and build your microservice architecture with your help.
-
 
 This project proposes to build a set of routines to accelerate the creation of an ecosystem in the flow of software development, enabling the automation of the construction of an initial environment for approval and testing of the project, seeking to facilitate the configuration, management, and monitoring of the environments through Kubernetes, container orchestrator, provides stability, scalability and centralized maintenance.
 
