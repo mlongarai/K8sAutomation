@@ -183,7 +183,7 @@
 			aks_service = document.getElementById("aks_service").value;
 			dns_name_suffix = document.getElementById("dns_name_suffix").value;
 			aks_location = document.getElementById("aks_location").value;
-			aks_files = document.getElementById("aks_files").files[0].path;
+			aks_files = document.getElementById("aks_files").files.path;
 
 			if (resource_group.trim().length < 5) {
 				//document.getElementById("li_resource_group").style.border = "1px solid Red";
