@@ -1,6 +1,3 @@
-require('path');
-var is = require("electron-is");
-
 // Mac and Linux have Bash shell scripts (so the following would work)
 //        var child = process.spawn('child', ['-l']);
 //        var child = process.spawn('./test.sh');       
@@ -12,19 +9,8 @@ var is = require("electron-is");
 function appendOutput(msg) { getCommandOutput().value += (msg+'\n'); };
 function setStatus(msg)    { getStatus().innerHTML = msg; };
 
-function showOS() {
-    if (is.windows())
-      appendOutput("Windows Detected.")
-    if (is.macOS())
-      appendOutput("macOS Detected.")
-    if (is.linux())
-      appendOutput("Linux Detected.")
-}
-
 function backgroundProcess(resource_group, aks_name, app_name, aks_service, dns_name_suffix, aks_location, aks_files) {
     const process = require('child_process');   // The power of Node.JS
-
-  //showOS();
 
   //var cmd = __dirname + '/scripts/' + 'phase2_test.sh';
   var cmd = __dirname + '/scripts/' + 'phase2_Deploy.sh';

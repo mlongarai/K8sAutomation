@@ -9,7 +9,6 @@
 	<link href="css/datepicker3.css" rel="stylesheet">
 	<link href="css/styles.css" rel="stylesheet">
 	
-	
 	<!--Custom Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 	<!--[if lt IE 9]>
@@ -42,8 +41,8 @@
 		
 		<ul class="nav menu">
 			<li><a href="home.html"><em class="fa fa-home">&nbsp;</em>Home</a></li>
-			<li><a href="provision.html"><em class="fa fa-toggle-off">&nbsp;</em>Provisioning</a></li>
-			<li class="active"><a href="deploy.html"><em class="fa fa-clone">&nbsp;</em> Deploying</a></li>
+			<li class="active"><a href="provision.html"><em class="fa fa-toggle-off">&nbsp;</em>Provisioning</a></li>
+			<li><a href="deploy.html"><em class="fa fa-clone">&nbsp;</em> Deploying</a></li>
 			<li><a href="about.html"><em class="fa fa-life-ring">&nbsp;</em> About</a></li>
 		</ul>
 	</div><!--/.sidebar-->
@@ -54,43 +53,50 @@
 				<li><a href="#">
 					<em class="fa fa-home"></em>
 				</a></li>
-				<li class="active">Deploying</li>
+				<li class="active">Provisioning</li>
 			</ol>
 		</div><!--/.row-->
-		
+		<br>
 		<div class="row">
 			<div class="col-lg-12">
-				
-				
-				
+				<div class="alert bg-teal" style="display: none" id="alert_resource_group" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em> Fill out Azure Resource Group <a href="#" onclick="javascript:this.parentNode.style.display='none';" class="pull-right"><em class="fa fa-lg fa-close"></em></a>
+				</div>
+				<div class="alert bg-teal" style="display: none" id="alert_registry_name" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em> Fill out Azure Container Registry Name <a href="#" onclick="javascript:this.parentNode.style.display='none';" class="pull-right"><em class="fa fa-lg fa-close"></em></a>
+				</div>
+				<div class="alert bg-teal" style="display: none" id="alert_aks_name" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em> Fill out Kubernetes Cluster <a href="#" onclick="javascript:this.parentNode.style.display='none';" class="pull-right"><em class="fa fa-lg fa-close"></em></a>
+				</div>
+				<div class="alert bg-teal" style="display: none" id="alert_nodes" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em> Fill out Azure Cluster Nodes <a href="#" onclick="javascript:this.parentNode.style.display='none';" class="pull-right"><em class="fa fa-lg fa-close"></em></a>
+				</div>
+			</div>
+		</div>
+		<!--/.row-->
+
+		<div class="row">
+			<div class="col-lg-12">
+
 				<div class="panel panel-default">
-					<div class="panel-heading">Deploying</div>
+					<div class="panel-heading">Provisioning</div>
 					<div class="panel-body">
 						<div class="col-md-6">
 							<form role="form" id="formAks" name="formAks">
 								<div class="form-group">
 									<label>Azure Resource Group</label>
-									<input class="form-control" placeholder="Enter your resource group name" name="resource_group" id="resource_group" maxlength="14" size="10" onblur="javascript:validate(this)">
+									<input class="form-control" placeholder="Enter your resource group name" name="resource_group"
+										id="resource_group" minlength="5" maxlength="14" size="10" onblur="javascript:validate(this)">
+								</div>
+								<div class="form-group">
+									<label>Azure Container Registry Name</label>
+									<input class="form-control" placeholder="Enter your container registry name" name="registry_name" id="registry_name" minlength="5" maxlength="14" size="10" onblur="javascript:validate(this)">
 								</div>
 								<div class="form-group">
 									<label>Kubernetes Cluster</label>
 									<input class="form-control" placeholder="Your AKS cluster name" name="aks_name" id="aks_name"
-										maxlength="14" size="10" onblur="javascript:validate(this)">
+										minlength="5" maxlength="14" size="10" onblur="javascript:validate(this)">
 								</div>
 								<div class="form-group">
-									<label>Application Name</label>
-									<input class="form-control" placeholder="Your app name" name="app_name" id="app_name"
-										maxlength="14" size="10" onblur="javascript:validate(this)">
-								</div>
-								<div class="form-group">
-									<label>Service Name</label>
-									<input class="form-control" placeholder="Your service name of the app" name="aks_service"
-										id="aks_service" maxlength="14" size="10" onblur="javascript:validate(this)">
-								</div>
-								<div class="form-group">
-									<label>DNS Suffix</label>
-									<input class="form-control" placeholder="Your DNS suffix for the project" name="dns_name_suffix" id="dns_name_suffix"
-										maxlength="14" size="10" onblur="javascript:validate(this)">
+									<label>Azure Cluster Nodes</label>
+									<input class="form-control" placeholder="Enter number of cluster nodes" name="nodes" id="nodes"
+										minlength="1" maxlength="2" size="2" onblur="javascript:validate(this)">
 								</div>
 								<div class="form-group">
 									<label>Azure Region</label>
@@ -122,9 +128,24 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label>File input</label>
-									<input type="file" name="aks_files" id="aks_files" multiple>
-									<p class="help-block">YAML and JSON files.</p>
+								<label>Azure VM Size</label>
+								<div> 
+									<div class="form-group">
+									<select class="form-control" name="vmsize" id="vmsize">
+										<option value="Standard_B1ls">Standard_B1ls (1 vCPU, 0.5 GB RAM, 4 GB SSD)</option>
+										<option value="Standard_B1s">Standard_B1s (1 vCPU, 1 GB RAM, 4 GB SSD)</option>
+										<option value="Standard_B1ms">Standard_B1ms (1 vCPU, 2 GB RAM, 4 GB SSD)</option>
+										<option value="Standard_B2s">Standard_B2s (2 vCPU, 4 GB RAM, 8 GB SSD)</option>
+										<option value="Standard_B2ms">Standard_B2ms (2 vCPU, 8 GB RAM, 16 GB SSD)</option>
+										<option value="Standard_B4ms">Standard_B4ms (4 vCPU, 16 GB RAM, 32 GB SSD)</option>
+										<option value="Standard_D2s_v3" selected="selected" >Standard_D2s_v3 (2 vCPU, 8 GB RAM, 16 GB SSD)</option>
+										<option value="Standard_D4s_v3">Standard_D4s_v3 (4 vCPU, 16 GB RAM, 32 GB SSD)</option>
+										<option value="Standard_DS1_v2">Standard_DS1_v2 (1 vCPU, 3.5 GB RAM, 7 GB SSD)</option>
+										<option value="Standard_DS2_v2">Standard_DS2_v2 (2 vCPU, 7 GB RAM, 14 GB SSD)</option>
+										<option value="Standard_DS3_v2">Standard_DS3_v2 (4 vCPU, 14 GB RAM, 28 GB SSD)</option>
+									</select>
+								</div>
+								</div>
 								</div>
 								<div class="form-group">
 									<button type="button" class="btn btn-primary" onclick="javascript:ExecShell();">Apply</button>
@@ -132,12 +153,13 @@
 								</div>
 								</div>
 								<div class="col-md-6">
-									<div class="form-group" >
+									<div class="form-group">
 										<label>Console</label>
 										<textarea
-											style="overflow: auto; resize: none; outline: none; height: 463px; background-color: #000; border: 1px solid #000; color: #00ff00; padding: 6px; font-family: Comic Sans MS, cursive, sans-serif; "
+											style="overflow: auto; resize: none; outline: none; height: 452px; background-color: #000; border: 1px solid #000; color: #00ff00; padding: 6px; font-family: Comic Sans MS, cursive, sans-serif;  "
 											class="form-control no-gray" id="command-output" disabled="true"></textarea>
 										<div id="status"></div>
+									</div>
 									</div>
 								</div>
 							</form>
@@ -150,19 +172,19 @@
 			</div>
 		</div><!-- /.row -->
 	</div><!--/.main-->
-			
+		
 	<script src="js/jquery-1.11.1.min.js"></script>
-	<script src="./gui-funct-phase2.js"></script>
+	<script src="./gui-funct-phase1.js"></script>
 
 	<script> 
 	function getCommandOutput() {
 		document.getElementById("command-output").scrollTop = document.getElementById("command-output").scrollHeight;
-		return document.getElementById("command-output");
+		return document.getElementById("command-output"); 
 	}
 	function getStatus() { return document.getElementById("status"); }
 
 	function validate(obj) {
-			if (obj.value.trim().length >= 5) {
+			if (obj.value.trim().length >= obj.attributes["minlength"].value) {
 				obj.parentNode.className="form-group has-success";
 			} else {
 				obj.parentNode.className = "form-group has-error";
@@ -172,49 +194,38 @@
 	function ExecShell() {
 
 			resource_group = document.getElementById("resource_group").value;
+			registry_name = document.getElementById("registry_name").value;
 			aks_name = document.getElementById("aks_name").value;
-			app_name = document.getElementById("app_name").value;
-			aks_service = document.getElementById("aks_service").value;
-			dns_name_suffix = document.getElementById("dns_name_suffix").value;
+			nodes = document.getElementById("nodes").value;
 			aks_location = document.getElementById("aks_location").value;
-		
-			
-			
-			var files_input = document.getElementById("aks_files").files;
-			var arrayPath = "";
-			for (i = 0; i < files_input.length; i++) {
-				arrayPath = arrayPath + files_input[i].path + " ";
+			vmsize = document.getElementById("vmsize").value;
 
-				//console.log(arrayPath);
-			}
-			aks_files = arrayPath;
-			console.log(aks_files);
+			var execProcess=true;
 
-			if (resource_group.trim().length < 5) {
-				//document.getElementById("li_resource_group").style.border = "1px solid Red";
-				document.getElementById("resource_group").focus();
-				alert('Fill out Azure Resource Group');
-			} else if (aks_name.trim().length < 5) {
-				//document.getElementById("li_aks_name").style.border = "1px solid Red";
+
+			if (nodes.trim().length < 1 ) {
+				document.getElementById("nodes").focus();
+				document.getElementById("alert_nodes").style.display = 'block';
+				execProcess = false;
+			} else { document.getElementById("alert_nodes").style.display = 'none'; }
+			if (aks_name.trim().length < 5) {
 				document.getElementById("aks_name").focus();
-				alert('Fill out Kubernetes Cluster');
-			} else if (app_name.trim().length < 5) {
-				//document.getElementById("li_app_name").style.border = "1px solid Red";
-				document.getElementById("app_name").focus();
-				alert('Fill out App name');
-			} else if (aks_service.trim().length < 5) {
-				//document.getElementById("li_dns_name_suffix").style.border = "1px solid Red";
-				document.getElementById("aks_service").focus();
-				alert('Fill out aks_service Name');
-			} else if (dns_name_suffix.trim().length < 5) {
-				//document.getElementById("li_dns_name_suffix").style.border = "1px solid Red";
-				document.getElementById("dns_name_suffix").focus();
-				alert('Fill out DNS Suffix');
-			} else {
-				backgroundProcess(resource_group, aks_name, app_name, aks_service, dns_name_suffix, aks_location, aks_files);
+				document.getElementById("alert_aks_name").style.display = 'block';
+				execProcess = false;
+			} else { document.getElementById("alert_aks_name").style.display = 'none'; }
+			if (registry_name.trim().length < 5) {
+				document.getElementById("registry_name").focus();
+				document.getElementById("alert_registry_name").style.display = 'block';
+				execProcess = false;
+			} else { document.getElementById("alert_registry_name").style.display = 'none'; }
+			if (resource_group.trim().length < 5) {
+				document.getElementById("resource_group").focus();
+				document.getElementById("alert_resource_group").style.display = 'block';
+				execProcess = false;
+			} else { document.getElementById("alert_resource_group").style.display = 'none';}
+			if (execProcess){
+				backgroundProcess(resource_group, registry_name, aks_name, nodes, aks_location, vmsize);
 			}
-			
-			//var textarea = document.getElementById('status').scrollTop = document.getElementById('status').scrollHeight;
 		}
 	</script>
 </body>

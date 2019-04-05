@@ -15,9 +15,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder",
-    "build:prod": "npm run build -- -c production",
-    "release:mac": "npm run build:prod && npx electron-builder build --mac -p always"
+    "dist": "electron-builder"
   },
   "keywords": [
     "electron",
@@ -43,6 +41,7 @@
   },
   "dependencies": {
     "ajv-keywords": "^3.4.0",
+    "electron-is": "3.0.0",
     "jquery": "3.3.1"
   },
   "devDependencies": {

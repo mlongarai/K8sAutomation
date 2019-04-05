@@ -62,12 +62,10 @@ if [[ "$(kubectl get svc --namespace default kubernetes -o jsonpath='{.metadata.
     /usr/local/bin/kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard
 fi
 
-echo "PRIMEIRO: ${aks_files[0]}"
-echo "SEGUNDO: ${aks_files[1]}"
-
 SAVEIFS="$IFS"
 IFS=$(echo -en "\n\b")
-for i in ${aks_files[@]} do
+eval "arr=($aks_files)"
+for i in "${arr[@]}"; do
     echo "Apply $i"
     echo /usr/local/bin/kubectl apply -f "$i" --kubeconfig "$kubeconfig"
 done

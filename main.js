@@ -1,4 +1,5 @@
 const { app, BrowserWindow } = require("electron");
+process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = '1';
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -18,7 +19,8 @@ app.on('window-all-closed', function() {
 app.on('ready', function() {
   // Create the browser window.
   
-  mainWindow = new BrowserWindow({ show: false ,
+  mainWindow = new BrowserWindow({ 
+    show: false ,
     icon: __dirname + '/app/assets/Icons/Icon.icns',
     title: 'K8s Automation'
   });
@@ -26,7 +28,7 @@ app.on('ready', function() {
   mainWindow.show();
 
   // and load the index.html of the app.
-  mainWindow.loadURL('file://' + __dirname + '/app/index.html');
+  mainWindow.loadURL('file://' + __dirname + '/app/home.html');
 
   // Open the DevTools.
   mainWindow.openDevTools();    // requires a height 410px 
