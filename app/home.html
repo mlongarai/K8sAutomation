@@ -47,7 +47,8 @@
 			<li class="active"><a href="home.html"><em class="fa fa-home">&nbsp;</em>Home</a></li>
 			<li><a href="provision.html"><em class="fa fa-toggle-off">&nbsp;</em>Provisioning</a></li>
 			<li><a href="deploy.html"><em class="fa fa-clone">&nbsp;</em> Deploying</a></li>
-			<li><a href="about.html"><em class="fa fa-life-ring">&nbsp;</em> About</a></li>
+			<li><a href="help.html"><em class="fa fa-life-ring">&nbsp;</em> Help</a></li>
+			<li><a href="about.html"><em class="fa fa-info">&nbsp;</em> About</a></li>
 		</ul>
 	</div>
 	<!--/.sidebar-->
@@ -65,11 +66,12 @@
 
 		<div class="row">
 			<div class="col-lg-12">
-				<h2>Features</h2>
+				<div class="panel panel-default">
+					<div class="panel-heading">Features</div>
 			</div>
 				<ul class="nav menu">
 				<div class="col-md-4">
-					<div class="panel panel-primary">
+					<div class="panel panel-primary" id="provisionButton" style="cursor: pointer;">
 						<div class="panel-heading dark-overlay"></em>Provisioning</a></div>
 						<div class="panel-body">
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut ante in sapien blandit luctus
@@ -79,7 +81,7 @@
 					</div>
 				</div>
 				<div class="col-md-4">
-					<div class="panel panel-warning">
+					<div class="panel panel-warning" id="deployButton" style="cursor: pointer;">
 						<div class="panel-heading dark-overlay">Deploying</div>
 						<div class="panel-body">
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ut ante in sapien blandit luctus
@@ -89,21 +91,42 @@
 					</div>
 				</div>
 				</ul>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
 		</div><!-- /.row -->
 			<div class="col-sm-12">
-				<p class="back-link">Lumino Theme by <a href="https://www.medialoot.com">Medialoot</a></p>
+				<p class="back-link">Copyright (c) 2019, Murilo Longarai</a></p>
+				<p class="back-link">Lumino Theme by <a target="_blank" href="https://www.medialoot.com">Medialoot</a></p>
 			</div>
 		</div><!--/.row-->
 	</div><!--/.main-->
 	
-		<script src="js/jquery-1.11.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/chart.min.js"></script>
 	<script src="js/chart-data.js"></script>
-	<script src="js/easypiechart.js"></script>
-	<script src="js/easypiechart-data.js"></script>
-	<script src="js/bootstrap-datepicker.js"></script>
-	<script src="js/custom.js"></script>
 	
+	<script type="text/javascript">
+		document.getElementById("provisionButton").onclick = function () {
+			location.href = "provision.html";
+		};
+		document.getElementById("deployButton").onclick = function () {
+				location.href = "deploy.html";
+			};
+	</script>
 </body>
 </html>

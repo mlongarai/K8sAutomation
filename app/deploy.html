@@ -44,7 +44,8 @@
 			<li><a href="home.html"><em class="fa fa-home">&nbsp;</em>Home</a></li>
 			<li><a href="provision.html"><em class="fa fa-toggle-off">&nbsp;</em>Provisioning</a></li>
 			<li class="active"><a href="deploy.html"><em class="fa fa-clone">&nbsp;</em> Deploying</a></li>
-			<li><a href="about.html"><em class="fa fa-life-ring">&nbsp;</em> About</a></li>
+			<li><a href="help.html"><em class="fa fa-life-ring">&nbsp;</em> Help</a></li>
+			<li><a href="about.html"><em class="fa fa-info">&nbsp;</em> About</a></li>
 		</ul>
 	</div><!--/.sidebar-->
 		
@@ -57,11 +58,40 @@
 				<li class="active">Deploying</li>
 			</ol>
 		</div><!--/.row-->
-		
+				<br>
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="alert bg-teal" style="display: none" id="alert_resource_group" role="alert"><em
+								class="fa fa-lg fa-warning">&nbsp;</em> Fill out Azure Resource Group <a href="#"
+								onclick="javascript:this.parentNode.style.display='none';" class="pull-right"><em
+									class="fa fa-lg fa-close"></em></a>
+						</div>
+						<div class="alert bg-teal" style="display: none" id="alert_aks_name" role="alert"><em
+								class="fa fa-lg fa-warning">&nbsp;</em> Fill out Kubernetes Cluster <a href="#"
+								onclick="javascript:this.parentNode.style.display='none';" class="pull-right"><em
+									class="fa fa-lg fa-close"></em></a>
+						</div>
+						<div class="alert bg-teal" style="display: none" id="alert_app_name" role="alert"><em
+								class="fa fa-lg fa-warning">&nbsp;</em> Fill out Application Name <a href="#"
+								onclick="javascript:this.parentNode.style.display='none';" class="pull-right"><em
+									class="fa fa-lg fa-close"></em></a>
+						</div>
+						<div class="alert bg-teal" style="display: none" id="alert_aks_service" role="alert"><em
+								class="fa fa-lg fa-warning">&nbsp;</em> Fill out Service Name <a href="#"
+								onclick="javascript:this.parentNode.style.display='none';" class="pull-right"><em
+									class="fa fa-lg fa-close"></em></a>
+						</div>
+						<div class="alert bg-teal" style="display: none" id="alert_dns_name_suffix" role="alert"><em
+								class="fa fa-lg fa-warning">&nbsp;</em> Fill out DNS Suffix <a href="#"
+								onclick="javascript:this.parentNode.style.display='none';" class="pull-right"><em
+									class="fa fa-lg fa-close"></em></a>
+						</div>
+					</div>
+				</div>
+				<!--/.row-->
+
 		<div class="row">
 			<div class="col-lg-12">
-				
-				
 				
 				<div class="panel panel-default">
 					<div class="panel-heading">Deploying</div>
@@ -75,22 +105,22 @@
 								<div class="form-group">
 									<label>Kubernetes Cluster</label>
 									<input class="form-control" placeholder="Your AKS cluster name" name="aks_name" id="aks_name"
-										maxlength="14" size="10" onblur="javascript:validate(this)">
+										minlength="5" maxlength="14" size="10" onblur="javascript:validate(this)">
 								</div>
 								<div class="form-group">
 									<label>Application Name</label>
 									<input class="form-control" placeholder="Your app name" name="app_name" id="app_name"
-										maxlength="14" size="10" onblur="javascript:validate(this)">
+										minlength="5" maxlength="14" size="10" onblur="javascript:validate(this)">
 								</div>
 								<div class="form-group">
 									<label>Service Name</label>
-									<input class="form-control" placeholder="Your service name of the app" name="aks_service"
-										id="aks_service" maxlength="14" size="10" onblur="javascript:validate(this)">
+									<input class="form-control" placeholder="Your service app name" name="aks_service"
+										id="aks_service" minlength="5" maxlength="14" size="10" onblur="javascript:validate(this)">
 								</div>
 								<div class="form-group">
 									<label>DNS Suffix</label>
 									<input class="form-control" placeholder="Your DNS suffix for the project" name="dns_name_suffix" id="dns_name_suffix"
-										maxlength="14" size="10" onblur="javascript:validate(this)">
+										minlength="5" maxlength="14" size="10" onblur="javascript:validate(this)">
 								</div>
 								<div class="form-group">
 									<label>Azure Region</label>
@@ -146,7 +176,8 @@
 				</div><!-- /.panel-->
 			</div><!-- /.col-->
 			<div class="col-sm-12">
-				<p class="back-link">Lumino Theme by <a href="https://www.medialoot.com">Medialoot</a></p>
+				<p class="back-link">Copyright (c) 2019, Murilo Longarai</a></p>
+				<p class="back-link">Lumino Theme by <a target="_blank" href="https://www.medialoot.com">Medialoot</a></p>
 			</div>
 		</div><!-- /.row -->
 	</div><!--/.main-->
@@ -162,12 +193,12 @@
 	function getStatus() { return document.getElementById("status"); }
 
 	function validate(obj) {
-			if (obj.value.trim().length >= 5) {
-				obj.parentNode.className="form-group has-success";
+			if (obj.value.trim().length >= obj.attributes["minlength"].value) {
+				obj.parentNode.className = "form-group has-success";
 			} else {
 				obj.parentNode.className = "form-group has-error";
 			}
-		}
+	}
 		
 	function ExecShell() {
 
@@ -178,43 +209,43 @@
 			dns_name_suffix = document.getElementById("dns_name_suffix").value;
 			aks_location = document.getElementById("aks_location").value;
 		
-			
-			
 			var files_input = document.getElementById("aks_files").files;
 			var arrayPath = "";
 			for (i = 0; i < files_input.length; i++) {
 				arrayPath = arrayPath + files_input[i].path + " ";
-
-				//console.log(arrayPath);
 			}
 			aks_files = arrayPath;
-			console.log(aks_files);
 
+			var execProcess = true;
+
+			if (dns_name_suffix.trim().length < 5) {
+			document.getElementById("dns_name_suffix").focus();
+			document.getElementById("alert_dns_name_suffix").style.display = 'block';
+			execProcess = false;
+			} else { document.getElementById("alert_dns_name_suffix").style.display = 'none'; }
+			if (aks_service.trim().length < 5) {
+			document.getElementById("aks_service").focus();
+			document.getElementById("alert_aks_service").style.display = 'block';
+			execProcess = false;
+			} else { document.getElementById("alert_aks_service").style.display = 'none'; }
+			if (app_name.trim().length < 5) {
+			document.getElementById("app_name").focus();
+			document.getElementById("alert_app_name").style.display = 'block';
+			execProcess = false;
+			} else { document.getElementById("alert_app_name").style.display = 'none'; }
+			if (aks_name.trim().length < 5) {
+			document.getElementById("aks_name").focus();
+			document.getElementById("alert_aks_name").style.display = 'block';
+			execProcess = false;
+			} else { document.getElementById("alert_aks_name").style.display = 'none';}
 			if (resource_group.trim().length < 5) {
-				//document.getElementById("li_resource_group").style.border = "1px solid Red";
 				document.getElementById("resource_group").focus();
-				alert('Fill out Azure Resource Group');
-			} else if (aks_name.trim().length < 5) {
-				//document.getElementById("li_aks_name").style.border = "1px solid Red";
-				document.getElementById("aks_name").focus();
-				alert('Fill out Kubernetes Cluster');
-			} else if (app_name.trim().length < 5) {
-				//document.getElementById("li_app_name").style.border = "1px solid Red";
-				document.getElementById("app_name").focus();
-				alert('Fill out App name');
-			} else if (aks_service.trim().length < 5) {
-				//document.getElementById("li_dns_name_suffix").style.border = "1px solid Red";
-				document.getElementById("aks_service").focus();
-				alert('Fill out aks_service Name');
-			} else if (dns_name_suffix.trim().length < 5) {
-				//document.getElementById("li_dns_name_suffix").style.border = "1px solid Red";
-				document.getElementById("dns_name_suffix").focus();
-				alert('Fill out DNS Suffix');
-			} else {
+				document.getElementById("alert_resource_group").style.display = 'block';
+				execProcess = false;
+			} else { document.getElementById("alert_resource_group").style.display = 'none';}
+			if (execProcess){
 				backgroundProcess(resource_group, aks_name, app_name, aks_service, dns_name_suffix, aks_location, aks_files);
 			}
-			
-			//var textarea = document.getElementById('status').scrollTop = document.getElementById('status').scrollHeight;
 		}
 	</script>
 </body>
