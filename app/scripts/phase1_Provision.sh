@@ -35,7 +35,7 @@ then
    helpFunction
 fi
 
-echo "Checking Azure CLI login..."
+#echo "Checking Azure CLI login..."
 if [ ! az group list >/dev/null 2>&1 ];
       then
          echo "Enter you login Azure"
@@ -46,34 +46,46 @@ if [ ! az group list >/dev/null 2>&1 ];
             exit 1
          fi
     else
-    echo "Logged on Azure. Finished!"
+    echo "Logged on Azure!"
 fi
 
-companion_rg="MC_${resource_group}_${aks_name}_${aks_location}"
-
-echo "      Checking Resource Group for $resource_group..."
-if [[ "$(az group exists --name "$resource_group")" == "false" ]]; then
-    echo "Creating Resource Group $resource_group"
+echo "Checking resource group $resource_group..."
+if [[ "$(az group exists --name $resource_group)" == "false" ]]; then
+    echo "Creating resource group $resource_group..."
     az group create -n "$resource_group" -l "$aks_location"
+    echo " $resource_group alredy exist."
 fi
 
-echo "      Checking Azure Container Registry for $registry_name..."
-if ! az acr repository show -n $resource_group --repository $resource_group >/dev/null 2>&1; then
-    echo "Creating Azure Container Registry $aks_name"
+echo "Checking Azure Container Registry for $registry_name..."
+if [[ "$(az acr show --name $registry_name --resource-group $resource_group --query 'provisioningState' --output tsv)" == "Succeeded" ]]; then
+    echo " $registry_name alredy exist."
+   else
+    echo "Creating Azure Container Registry $registry_name..."
     az acr create --resource-group $resource_group --name $registry_name --sku Basic
 fi
 
-echo "      Checking Azure Kubernetes Service for $aks_name..."
-if ! az aks show -g "$resource_group" -n "$aks_name" >/dev/null 2>&1; then
-    echo "Creating AKS $aks_name"
-    az aks create -g "$resource_group" -n "$aks_name" --node-count "$nodes" --node-vm-size "$vmsize"
-    echo "Setting up Kubernetes Nodes for $aks_name..."
-    sleep 600 # Aprox. 10 mim to create AKS Cluster
+echo "Checking Azure Kubernetes Service for $aks_name..."
+
+
+if [[ "$(az aks show -g $resource_group -n $aks_name --query 'provisioningState' --output tsv)" == "Succeeded" ]]; then
+    echo " $aks_name alredy exist."
+    else
+    echo "Creating AKS $aks_name..."
+    az aks create -g "$resource_group" -n $aks_name --node-count $nodes --node-vm-size $vmsize
+    echo "Setting up Kubernetes Nodes for $aks_name... could take more than 10 min to complete."
+    echo "Follow the end of creation on Azure Portal."
+    sleep 60
 fi
 
 kubeconfig="$(mktemp)"
 
-echo "Fetch AKS credentials to $kubeconfig"
-az aks get-credentials -g "$resource_group" -n "$aks_name" --admin --file "$kubeconfig"
+echo "Fetch AKS credentials to $kubeconfig..."
+az aks get-credentials -g $resource_group -n $aks_name --admin --file "$kubeconfig"
 
-echo "Creating Azure Kubernetes Service finished!"
+echo " "
+echo "------------------"
+echo " Your RG is: $resource_group"
+echo " Your ACR is: $registry_name"
+echo " Your AKS is: $aks_name"
+echo " "
+echo "finished!"

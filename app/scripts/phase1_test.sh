@@ -49,9 +49,4 @@ if [ ! az group list >/dev/null 2>&1 ];
     echo "Logged on Azure. Finished!"
 fi
 
-/usr/local/bin/kubectl get svc
-/usr/local/bin/kubectl options
-
-echo $nodes
-echo $aks_location
-echo $vmsize
+/usr/local/bin/kubectl get nodes
