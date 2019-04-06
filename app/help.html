@@ -67,170 +67,40 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
-					<div class="panel-heading">Github Readme</div>
+					<div class="panel-heading">Help</div>
 					<div class="panel-body">
 						<div class="col-md-12">
-							<div class="panel panel-default">
-								<div class="panel-heading dark-overlay"></div>
-								<div class="panel-body">
-									<p>
-									<h1 id="k8sautomation">K8sAutomation</h1>
-									<p>
-									<h2 id="overview">Overview</h2>
-									<p>Simplify building your Azure Kubernetes Service (AKS) cloud infrastructure. Use this app to provision and deploy a
-										kubernetes cluster and and build your microservice architecture quickly and easily.</p>
-									<p>This is a desktop app was built with <a target="_blank" href="http://electronjs.org">Electron</a>. This app works only macOS
-										operating system.</p>
-									<p>This project proposes to build a set of routines to accelerate the creation of an ecosystem in the flow of software
-										development, enabling the automation of the construction of an initial environment for approval and testing of the
-										project, seeking to facilitate the configuration, management, and monitoring of the environments through Kubernetes,
-										container orchestrator, provides stability, scalability and centralized maintenance.</p>
-									<h3 id="requirements">Requirements</h3>
-									<ul>
-										<li>Install Azure CLI: <a
-												href="https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-macos?view=azure-cli-latest">Azure CLI
-												for macOS</a></li>
-										<li>Install kubectl: <a target="_blank" href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">kubectl</a></li>
-									</ul>
-									<p>OR</p>
-									<ul>
-										<li>
-											<p>You can install via brew:</p>
-											<p> ```Azure CLI
-												brew install azure-cli</p>
-											<pre><code> ```kubectl
-									 brew install kubernetes-cli
-									</code></pre>
-										</li>
-										<li>
-											<p>Check on terminal:</p>
-											<p> <code>Check instalation
-									 az --version
-									 kubectl version</code></p>
-										</li>
-										<li>
-											<p>Login Azure Subscription</p>
-											<pre><code class="lang-sh"><span class="hljs-attribute"> az login</span>
-									</code></pre>
-										</li>
-									</ul>
-									<h2 id="getting-started">Getting Started</h2>
-									<h3 id="creating-a-new-aks-infrastructure">Creating a new AKS infrastructure</h3>
-									<h3 id="download-and-run">Download and Run</h3>
-									<ul>
-										<li>Get latest Release: <a target="_blank" href="https://github.com/mlongarai/K8sAutomation/releases/latest">Latest</a></li>
-									</ul>
-									<p>OR</p>
-									<ul>
-										<li>
-											<p>Do yourself: </p>
-											<pre><code class="lang-Github"> git <span class="hljs-keyword">clone</span> <span class="hljs-title">https</span>://github.com/mlongarai/K8sAutomation.git
-									 cd K8sAutomation
-									 npm install
-									 npm <span class="hljs-literal">start</span>
-									</code></pre>
-										</li>
-									</ul>
-									<h3 id="provisioning">Provisioning</h3>
-									<ul>
-										<li>
-											<p>Fill out:</p>
-											<ul>
-												<li>Name of new Resource Group of Azure</li>
-												<li>Name of new Azure Container Registry</li>
-												<li>Name of new Cluster K8s</li>
-												<li>Number of Cluster Nodes</li>
-												<li>Name of Location<ul>
-														<li><a target="_blank" href="https://docs.microsoft.com/en-us/azure/aks/container-service-quotas">Region
-																availability</a></li>
-													</ul>
-												</li>
-												<li>Name of VM Size <ul>
-														<li><a target="_blank" href="https://docs.microsoft.com/en-us/azure/cloud-services/cloud-services-sizes-specs">Size
-																Spec</a></li>
-													</ul>
-												</li>
-											</ul>
-										</li>
-									</ul>
-									<p>And press Apply.</p>
-									<ul>
-										<li>Console:</li>
-									</ul>
-									<p>You can see all information of provisioning steps on console.</p>
-									<h3 id="deploying">Deploying</h3>
-									<p>For this step you need to use some example like <a
-											href="https://github.com/mlongarai/">api-mongodb-jenkins-example</a> for deploy pods, services, deployments,
-										etc.</p>
-									<ul>
-										<li>
-											<p>Fill out:</p>
-											<ul>
-												<li>Name of new Resource Group of Azure</li>
-												<li>Name of new Cluster K8s</li>
-												<li>Name of new App</li>
-												<li>Name of new Service</li>
-												<li>Name of new DNS suffix</li>
-												<li>Name of location provisioned<ul>
-														<li>List <a target="_blank" href="https://docs.microsoft.com/en-us/azure/aks/container-service-quotas">Quotas and
-																region availability for Azure Kubernetes Service (AKS)</a></li>
-													</ul>
-												</li>
-											</ul>
-										</li>
-									</ul>
-									<p>And press Apply.</p>
-									<ul>
-										<li>Console:</li>
-									</ul>
-									<p>You can see all information of deploying steps on console.</p>
-									<h3 id="monitoring-your-infrastructure">Monitoring your Infrastructure</h3>
-									<ul>
-										<li><a target="_blank" href="http://portal.azure.com/">Azure Portal</a></li>
-										<li><a target="_blank" href="https://github.com/kubernetes/dashboard">Kubernetes Dashboard</a></li>
-									</ul>
-									<h3 id="examples-of-k8s-architecture-scenarios">Examples of K8s architecture scenarios</h3>
-									<ul>
-										<li><a target="_blank" href="https://github.com/mlongarai/">api-mongodb-jenkins-example</a>: API for Documentation using Node.js +
-											MongoDB + Jenkins for CI/CD</li>
-									</ul>
-									<h3 id="terminal-experts">Terminal Experts</h3>
-									<ul>
-										<li><a target="_blank" href="https://docs.microsoft.com/en-us/cli/azure/ext/aks-preview/aks?view=azure-cli-latest">Azure CLI</a>
-										</li>
-										<li><a target="_blank" href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/">kubectl Cheat Sheet</a></li>
-									</ul>
-									<h3 id="deleting-the-aks-infrastructure-and-all-associated-resources-">Deleting the AKS infrastructure (and all
-										associated resources)</h3>
-									<ul>
-										<li>Open the terminal and write:
-											<pre><code class="lang-vim"> az <span class="hljs-keyword">group</span> <span class="hljs-title">delete</span> -n MyResourceGroup --no-wait
-									</code></pre>
-										</li>
-									</ul>
-									<h2 id="credits">Credits</h2>
-									<ul>
-										<li>Original idea of base code shell script by <a
-												href="https://github.com/Azure-Samples/azure-voting-app-redis">Azure Voting App</a>.</li>
-										<li>Original idea of base code electron app by <a
-												href="https://github.com/martinjackson/electron-run-shell-example">Electron Run Shell Example</a>.</li>
-										<li>Original idea of base code bootstrap by <a target="_blank" href="https://medialoot.com/themes/">Medialoot</a>.</li>
-									</ul>
-									<h2 id="contributors">Contributors</h2>
-									<p>Special thanks to my friends who helped me solve complex architectural and software development problems in this
-										project.</p>
-									<ul>
-										<li>@<a target="_blank" href="https://github.com/eduth">eduth</a></li>
-									</ul>
-									<p align="center">
-										<br>
-										<br>
-										<b>“Thank you to all who have contributed in this great work”</b><br>
-										<br><br>
-									</p>
-									</p>
-
+										Steps
 										</div>
+										<div class="panel-body timeline-container">
+											<ul class="timeline">
+												<li>
+													<div class="timeline-badge primary" id="readmeButton" style="cursor: pointer;"><em class="glyphicon glyphicon-book"></em></div>
+													<div class="timeline-panel">
+														<div class="timeline-heading">
+															<h4><em class="timeline-title"></em>Github Readme</h4>
+														</div>
+														<div class="timeline-body">
+															<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at sodales nisl. Donec
+																malesuada orci ornare risus finibus feugiat.</p>
+														</div>
+													</div>
+												</li>
+												<li>
+													<div class="timeline-badge" id="issueButton" style="cursor: pointer;"><em class="glyphicon glyphicon-flag"></em></div>
+													<div class="timeline-panel">
+														<div class="timeline-heading">
+															<h4 class="timeline-title">Issue</h4>
+														</div>
+														<div class="timeline-body">
+															<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+														</div>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<p>
 									</p>
 								</div>
 							</div>
@@ -249,6 +119,15 @@
 				<script src="js/jquery-1.11.1.min.js"></script>
 				<script src="js/chart.min.js"></script>
 				<script src="js/chart-data.js"></script>
+				
+				<script type="text/javascript">
+					document.getElementById("readmeButton").onclick = function () {
+						window.open("https://github.com/mlongarai/K8sAutomation/#README.md", '_blank');
+					};
+					document.getElementById("issueButton").onclick = function () {
+						window.open("https://github.com/mlongarai/K8sAutomation/issues", '_blank');
+					};
+				</script>
 
 </body>
 
