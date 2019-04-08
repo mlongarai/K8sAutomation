@@ -34,52 +34,52 @@ then
    echo "Some or all of the parameters are empty";
    helpFunction
 fi
-
 echo "Checking Azure CLI login..."
 if [ ! az group list >/dev/null 2>&1 ];
       then
-         echo "Enter you login Azure"
+         echo -n "Enter you login Azure"
          az login
          if [ ! az group list >/dev/null 2>&1 ]; 
             then
-            echo "Login Azure CLI required" >&2
+            echo -n "Login Azure CLI required" >&2
             exit 1
          fi
     else
-    echo "Logged on Azure. Finished!"
+    echo "Logged on Azure!"
 fi
+echo "-----------------------------------"
 
-companion_rg="MC_${resource_group}_${aks_name}_${aks_location}"
+temp_companion_rg="MC_${resource_group}_${aks_name}_${aks_location}"
+companion_rg=${temp_companion_rg// /}
 
-kubeconfig="$(mktemp)"
-
-echo "Fetch AKS credentials to $kubeconfig"
-az aks get-credentials -g "$resource_group" -n "$aks_name" --admin --file "$kubeconfig"
-
-echo "      Checking Kubernetes Cluster for $aks_name..."
+#kubeconfig="$(mktemp)"
+echo -n "Fetch AKS credentials to $aks_name"
+az aks get-credentials -g "$resource_group" -n "$aks_name"
+echo "-----------------------------------"
+echo -n "Checking Kubernetes Cluster for $aks_name..."
 if [[ "$(kubectl get svc --namespace default kubernetes -o jsonpath='{.metadata.labels.provider}')" == "kubernetes" ]]; then
-    echo "      Setting up Dashboard K8s for $aks_name"
+    echo "Setting up Dashboard K8s for $aks_name"
     /usr/local/bin/kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard
 fi
-
+echo "-----------------------------------"
 SAVEIFS="$IFS"
 IFS=$(echo -en "\n\b")
 eval "arr=($aks_files)"
 for i in "${arr[@]}"; do
-    echo "Apply $i"
-    echo /usr/local/bin/kubectl apply -f "$i" --kubeconfig "$kubeconfig"
+    #echo "Apply $i"
+    echo /usr/local/bin/kubectl apply -f "$i"
 done
 IFS="$SAVEIFS"
-
+echo "-----------------------------------"
 function assign_dns {
     aks_service="$1"
-    dns_name="$2"
+    dns_name="${2// /}"
     IP=
     while true; do
-        echo "      Waiting external IP for $aks_service..."
-        IP="$(/usr/local/bin/kubectl get service "$aks_service" --kubeconfig "$kubeconfig" | tail -n +2 | awk '{print $4}' | grep -v '<')"
+        echo -n "Waiting external IP for $aks_service..."
+        IP="$(/usr/local/bin/kubectl get service "$aks_service" | tail -n +2 | awk '{print $4}' | grep -v '<')"
         if [[ "$?" == 0 && -n "$IP" ]]; then
-            echo "Service $aks_service public IP: $IP"
+            echo -n "Service $aks_service public IP: $IP"
             break
         fi
         sleep 120 # Aprox. 2 mim to create Service IP
@@ -87,22 +87,23 @@ function assign_dns {
 
     public_ip="$(az network public-ip list -g "$companion_rg" --query "[?ipAddress==\`$IP\`] | [0].id" -o tsv)"
     if [[ -z "$public_ip" ]]; then
-        echo "Cannot find public IP resource ID for '$aks_service' in companion resource group '$companion_rg'" >&2
+        echo -n "Cannot find public IP resource ID for '$aks_service' in companion resource group '$companion_rg'" >&2
         exit 1
     fi
 
-    echo "      Assign DNS name '$dns_name' for '$aks_service'"
+    echo -n "Assign DNS name '$dns_name' for '$aks_service'"
     az network public-ip update --dns-name "$dns_name" --ids "$public_ip"
     [[ $? != 0 ]] && exit 1
 }
-
-assign_dns $app_name "$app_name-$dns_name_suffix"
-
+temp_dns_assign="$app_name-$dns_name_suffix"
+thisdns="${temp_dns_assign// /}"
+assign_dns $app_name "$thisdns"
 rm -f "$kubeconfig"
 
-urlapi="http://$app_name-$dns_name_suffix.eastus.cloudapp.azure.com"
-echo "Browse API page $urlapi and add with your port exposed e.g. https://myappname-dnssuffix.esatus.cloudapp.azure.com:4000/documentation"
-sleep 10
+urlapi="http://$temp_dns_assign.eastus.cloudapp.azure.com"
+echo "Browse API page and add with your port exposed"
+echo " '${urlapi// /}' "
+#sleep 10
 
-echo "Browsing Dashboard Kubernetes..."
-az aks browse --resource-group $resource_group --name $aks_name
+#echo -n "Browsing Dashboard Kubernetes..."
+#az aks browse --resource-group $resource_group --name $aks_name
