@@ -1,4 +1,6 @@
 #!/bin/bash
+export PATH="$PATH:/usr/local/bin/"
+source ~/.bash_profile
 
 helpFunction()
 {
@@ -60,7 +62,7 @@ echo "-----------------------------------"
 echo -n "Checking Kubernetes Cluster for $aks_name..."
 if [[ "$(kubectl get svc --namespace default kubernetes -o jsonpath='{.metadata.labels.provider}')" == "kubernetes" ]]; then
     echo "Setting up Dashboard K8s for $aks_name..."
-    nohup /usr/local/bin/kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard &>/dev/null &
+    nohup kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard &>/dev/null &
 fi
 echo "-----------------------------------"
 echo "Checking Manifest files..."
@@ -69,7 +71,7 @@ IFS=$(echo -en "\n\b")
 eval "arr=($aks_files)"
 for i in "${arr[@]}"; do
     #echo "Apply $i"
-    /usr/local/bin/kubectl apply -f "$i"
+    kubectl apply -f "$i"
 done
 IFS="$SAVEIFS"
 echo "-----------------------------------"
@@ -79,7 +81,7 @@ function assign_dns {
     IP=
     while true; do
         echo -n "Waiting external IP for $aks_service..."
-        IP="$(/usr/local/bin/kubectl get service "$aks_service" | tail -n +2 | awk '{print $4}' | grep -v '<')"
+        IP="$(kubectl get service "$aks_service" | tail -n +2 | awk '{print $4}' | grep -v '<')"
         if [[ "$?" == 0 && -n "$IP" ]]; then
             echo -n "Service $aks_service public IP: $IP"
             break
@@ -106,10 +108,4 @@ urlapi="http://$temp_dns_assign.eastus.cloudapp.azure.com"
 echo "Copy URL page AND access WITH your PORT exposed"
 echo " '${urlapi// /}' "
 sleep 10
-echo "-----------------------------------"
-echo "Browsing Dashboard Kubernetes..."
-#az aks browse --resource-group $resource_group --name $aks_name &
-#sleep 20
-echo "-----------------------------------"
 echo "Finished!"
-#exit 0

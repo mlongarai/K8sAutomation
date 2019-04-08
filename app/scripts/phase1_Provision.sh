@@ -1,5 +1,7 @@
 #!/bin/bash
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+export PATH="$PATH:/usr/local/bin/"
+source ~/.bash_profile
+#DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 helpFunction()
 {
    echo -n ""
@@ -30,7 +32,7 @@ then
    echo -n "Some or all of the parameters are empty";
    helpFunction
 fi
-echo -n "Checking Azure CLI login..."
+echo "Checking Azure CLI login..."
 if [ ! az group list >/dev/null 2>&1 ];
       then
          echo -n "Enter you login Azure"
@@ -46,20 +48,20 @@ fi
 echo "-----------------------------------"
 echo -n "Checking resource group $resource_group..."
 if [[ "$(az group exists --name $resource_group)" == "false" ]]; then
-    echo -n "Creating resource group $resource_group..."
-    az group create -n $resource_group -l $aks_location || exit 1
-    sleep 10
+      echo -n "Creating resource group $resource_group..."
+      az group create -n $resource_group -l $aks_location || exit 1
+      sleep 10
     else
-    echo "$resource_group already exist."
+      echo "$resource_group already exist."
 fi
 echo "-----------------------------------"
 echo -n "Checking Azure Container Registry for $registry_name..."
 if [[ "$(az acr show --name $registry_name --resource-group $resource_group --query 'provisioningState' --output tsv)" == "Succeeded" ]]; then
-    echo "$registry_name already exist."
+      echo "$registry_name already exist."
    else
-    echo -n "Creating Azure Container Registry $registry_name..."
-    az acr create --resource-group $resource_group --name $registry_name --sku Basic  || exit 1
-    sleep 10
+      echo -n "Creating Azure Container Registry $registry_name..."
+      az acr create --resource-group $resource_group --name $registry_name --sku Basic  || exit 1
+      sleep 10
 fi
 echo "-----------------------------------"
 echo -n "Checking Azure Kubernetes Service for $aks_name..."
@@ -76,8 +78,5 @@ echo -n "-----------------------------------"
 kubeconfig="$(mktemp)"
 echo -n "Fetch AKS credentials to $aks_name..."
 az aks get-credentials -g $resource_group -n $aks_name --admin --file "$kubeconfig"
-echo "-----------------------------------"
-echo " Your RG is: $resource_group"
-echo " Your ACR is: $registry_name"
-echo " Your AKS is: $aks_name"
+
 echo "Finished!"
