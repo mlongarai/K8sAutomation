@@ -7,7 +7,7 @@
 //
 
 function appendOutput(msg) { getCommandOutput().value += (msg+'\n'); };
-function setStatus(msg)    { getStatus().innerHTML = msg; };
+function setStatus(msg)    { getStatus(msg); };
 
 function backgroundProcess(resource_group, registry_name, aks_name, nodes, aks_location, vmsize) {
     const process = require('child_process');   // The power of Node.JS
@@ -32,9 +32,9 @@ function backgroundProcess(resource_group, registry_name, aks_name, nodes, aks_l
 
     child.on('close', function (code) {
         if (code == 0)
-          setStatus('Process complete.');
+          setStatus('Success');
         else
-          setStatus('child process exited with code ' + code);
+          setStatus('Error');
 
         getCommandOutput().style.background = "Dark";
         //getCommandOutput().style.background = "DarkGray";

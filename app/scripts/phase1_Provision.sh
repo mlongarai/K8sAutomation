@@ -47,25 +47,27 @@ echo "-----------------------------------"
 echo -n "Checking resource group $resource_group..."
 if [[ "$(az group exists --name $resource_group)" == "false" ]]; then
     echo -n "Creating resource group $resource_group..."
-    az group create -n "$resource_group" -l "$aks_location"
+    az group create -n $resource_group -l $aks_location || exit 1
+    sleep 10
     else
-    echo "$resource_group alredy exist."
+    echo "$resource_group already exist."
 fi
 echo "-----------------------------------"
 echo -n "Checking Azure Container Registry for $registry_name..."
 if [[ "$(az acr show --name $registry_name --resource-group $resource_group --query 'provisioningState' --output tsv)" == "Succeeded" ]]; then
-    echo "$registry_name alredy exist."
+    echo "$registry_name already exist."
    else
     echo -n "Creating Azure Container Registry $registry_name..."
-    az acr create --resource-group $resource_group --name $registry_name --sku Basic
+    az acr create --resource-group $resource_group --name $registry_name --sku Basic  || exit 1
+    sleep 10
 fi
 echo "-----------------------------------"
 echo -n "Checking Azure Kubernetes Service for $aks_name..."
 if [[ "$(az aks show -g $resource_group -n $aks_name --query 'provisioningState' --output tsv)" == "Succeeded" ]]; then
-    echo "$aks_name alredy exist."
+    echo "$aks_name already exist."
     else
     echo -n "Creating AKS $aks_name..."
-    az aks create -g "$resource_group" -n $aks_name --node-count $nodes --node-vm-size $vmsize
+    az aks create -g $resource_group -n $aks_name --node-count $nodes --node-vm-size $vmsize  || exit 1
     echo "Setting up Kubernetes Nodes for $aks_name... could take more than 10 min to complete."
     echo -n "Follow the end of creation on Azure Portal."
     sleep 60

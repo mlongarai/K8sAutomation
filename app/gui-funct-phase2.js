@@ -31,10 +31,10 @@ function backgroundProcess(resource_group, aks_name, app_name, aks_service, dns_
     });
 
     child.on('close', function (code) {
-        if (code == 0)
-          setStatus('Process complete.');
-        else
-          setStatus('child process exited with code ' + code);
+      if (code == 0)
+        setStatus('Success');
+      else
+        setStatus('Error');
 
       getCommandOutput().style.background = "Dark";
     });

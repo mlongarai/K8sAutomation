@@ -53,13 +53,14 @@ temp_companion_rg="MC_${resource_group}_${aks_name}_${aks_location}"
 companion_rg=${temp_companion_rg// /}
 
 #kubeconfig="$(mktemp)"
-echo -n "Fetch AKS credentials to $aks_name"
-az aks get-credentials -g "$resource_group" -n "$aks_name"
+echo "Fetch AKS credentials to $aks_name..."
+nohup az aks get-credentials -g $resource_group -n $aks_name &>/dev/null &
+sleep 10
 echo "-----------------------------------"
 echo -n "Checking Kubernetes Cluster for $aks_name..."
 if [[ "$(kubectl get svc --namespace default kubernetes -o jsonpath='{.metadata.labels.provider}')" == "kubernetes" ]]; then
-    echo "Setting up Dashboard K8s for $aks_name"
-    /usr/local/bin/kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard
+    echo "Setting up Dashboard K8s for $aks_name..."
+    nohup /usr/local/bin/kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard &>/dev/null &
 fi
 echo "-----------------------------------"
 SAVEIFS="$IFS"
@@ -67,7 +68,7 @@ IFS=$(echo -en "\n\b")
 eval "arr=($aks_files)"
 for i in "${arr[@]}"; do
     #echo "Apply $i"
-    echo /usr/local/bin/kubectl apply -f "$i"
+    /usr/local/bin/kubectl apply -f "$i"  || exit 1
 done
 IFS="$SAVEIFS"
 echo "-----------------------------------"
@@ -91,19 +92,21 @@ function assign_dns {
         exit 1
     fi
 
-    echo -n "Assign DNS name '$dns_name' for '$aks_service'"
-    az network public-ip update --dns-name "$dns_name" --ids "$public_ip"
+    echo -n "Assign DNS name '$dns_name' for '$aks_service'...wait..."
+    az network public-ip update --dns-name "$dns_name" --ids "$public_ip" || exit 1
     [[ $? != 0 ]] && exit 1
 }
 temp_dns_assign="$app_name-$dns_name_suffix"
 thisdns="${temp_dns_assign// /}"
 assign_dns $app_name "$thisdns"
 rm -f "$kubeconfig"
-
+echo "-----------------------------------"
 urlapi="http://$temp_dns_assign.eastus.cloudapp.azure.com"
-echo "Browse API page and add with your port exposed"
+echo "Copy URL page AND access WITH your PORT exposed"
 echo " '${urlapi// /}' "
-#sleep 10
-
-#echo -n "Browsing Dashboard Kubernetes..."
-#az aks browse --resource-group $resource_group --name $aks_name
+sleep 10
+echo "-----------------------------------"
+echo "Browsing Dashboard Kubernetes..."
+nohup az aks browse --resource-group $resource_group --name $aks_name &
+echo "-----------------------------------"
+echo "Finished!"

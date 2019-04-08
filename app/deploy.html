@@ -42,8 +42,8 @@
 		
 		<ul class="nav menu">
 			<li><a href="home.html"><em class="fa fa-home">&nbsp;</em>Home</a></li>
-			<li><a href="provision.html"><em class="fa fa-toggle-off">&nbsp;</em>Provisioning</a></li>
-			<li class="active"><a href="deploy.html"><em class="fa fa-clone">&nbsp;</em> Deploying</a></li>
+			<li><a href="provision.html"><em class="fa fa-toggle-off">&nbsp;</em>Provision</a></li>
+			<li class="active"><a href="deploy.html"><em class="fa fa-clone">&nbsp;</em> Deploy</a></li>
 			<li><a href="help.html"><em class="fa fa-life-ring">&nbsp;</em> Help</a></li>
 			<li><a href="about.html"><em class="fa fa-info">&nbsp;</em> About</a></li>
 		</ul>
@@ -55,7 +55,7 @@
 				<li><a href="#">
 					<em class="fa fa-home"></em>
 				</a></li>
-				<li class="active">Deploying</li>
+				<li class="active">Deploy</li>
 			</ol>
 		</div><!--/.row-->
 				<br>
@@ -86,6 +86,16 @@
 								onclick="javascript:this.parentNode.style.display='none';" class="pull-right"><em
 									class="fa fa-lg fa-close"></em></a>
 						</div>
+						<div class="alert bg-success" style="display: none" id="alert_success" role="alert"><em
+						class="fa fa-lg fa-warning">&nbsp;</em> Success: Process Completed! <a href="#"
+						onclick="javascript:this.parentNode.style.display='none';" class="pull-right"><em
+							class="fa fa-lg fa-close"></em></a>
+				</div>
+				<div class="alert bg-danger" style="display: none" id="alert_error" role="alert"><em
+						class="fa fa-lg fa-warning">&nbsp;</em> Error: There was some error in the process! Check the log on the console. <a href="#"
+						onclick="javascript:this.parentNode.style.display='none';" class="pull-right"><em
+							class="fa fa-lg fa-close"></em></a>
+				</div>
 					</div>
 				</div>
 				<!--/.row-->
@@ -94,33 +104,33 @@
 			<div class="col-lg-12">
 				
 				<div class="panel panel-default">
-					<div class="panel-heading">Deploying</div>
+					<div class="panel-heading">Deploy</div>
 					<div class="panel-body">
 						<div class="col-md-6">
 							<form role="form" id="formAks" name="formAks">
 								<div class="form-group">
 									<label>Azure Resource Group</label>
-									<input class="form-control" placeholder="Enter your resource group name" name="resource_group" id="resource_group" minlength="5" maxlength="14" size="10" onblur="javascript:validate(this)">
+									<input class="form-control" placeholder="Enter your resource group name" name="resource_group" id="resource_group" minlength="5" maxlength="14" size="10" onchange="validateChar(this)" onkeyup="validateChar(this)" onblur="validate(this)">
 								</div>
 								<div class="form-group">
 									<label>Kubernetes Cluster</label>
 									<input class="form-control" placeholder="Your AKS cluster name" name="aks_name" id="aks_name"
-										minlength="5" maxlength="14" size="10" onblur="javascript:validate(this)">
+										minlength="5" maxlength="14" size="10" onchange="validateChar(this)" onkeyup="validateChar(this)" onblur="validate(this)">
 								</div>
 								<div class="form-group">
 									<label>Application Name</label>
 									<input class="form-control" placeholder="Your app name" name="app_name" id="app_name"
-										minlength="5" maxlength="14" size="10" onblur="javascript:validate(this)">
+										minlength="5" maxlength="14" size="10" onchange="validateChar(this)" onkeyup="validateChar(this)" onblur="validate(this)">
 								</div>
 								<div class="form-group">
 									<label>Service Name</label>
 									<input class="form-control" placeholder="Your service app name" name="aks_service"
-										id="aks_service" minlength="5" maxlength="14" size="10" onblur="javascript:validate(this)">
+										id="aks_service" minlength="5" maxlength="14" size="10" onchange="validateChar(this)" onkeyup="validateChar(this)" onblur="validate(this)">
 								</div>
 								<div class="form-group">
 									<label>DNS Suffix</label>
 									<input class="form-control" placeholder="Your DNS suffix for the project" name="dns_name_suffix" id="dns_name_suffix"
-										minlength="5" maxlength="14" size="10" onblur="javascript:validate(this)">
+										minlength="5" maxlength="14" size="10" onchange="validateChar(this)" onkeyup="validateChar(this)" onblur="validate(this)">
 								</div>
 								<div class="form-group">
 									<label>Azure Region</label>
@@ -158,14 +168,14 @@
 								</div>
 								<div class="form-group">
 									<button type="button" class="btn btn-primary" onclick="javascript:ExecShell();">Apply</button>
-									<button type="reset" class="btn btn-default">Reset</button>
+									<button type="reset" class="btn btn-default" onclick="javascript:Reset();">Reset</button>
 								</div>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group" >
 										<label>Console</label>
 										<textarea
-											style="overflow: auto; resize: none; outline: none; height: 463px; background-color: #000; border: 1px solid #000; color: #00ff00; padding: 6px; font-family: Comic Sans MS, cursive, sans-serif; "
+											style="overflow: auto; resize: none; outline: none; height: 463px; background-color: #000; border: 1px solid #000; color: #00ff00; padding: 6px; font-family: Menlo, Monaco, 'Courier New', monospace; font-size:small; "
 											class="form-control no-gray" id="command-output" disabled="true"></textarea>
 										<div id="status"></div>
 									</div>
@@ -190,7 +200,18 @@
 		document.getElementById("command-output").scrollTop = document.getElementById("command-output").scrollHeight;
 		return document.getElementById("command-output");
 	}
-	function getStatus() { return document.getElementById("status"); }
+	function getStatus(msg) {
+			if (msg == "Success") {
+				document.getElementById("alert_success").style.display = 'block';
+				document.getElementById("alert_error").style.display = 'none';
+			} else if (msg == "Error") {
+				document.getElementById("alert_error").style.display = 'block';
+				document.getElementById("alert_success").style.display = 'none';
+			} else {
+				document.getElementById("alert_success").style.display = 'none';
+				document.getElementById("alert_error").style.display = 'none';
+			}
+		}
 
 	function validate(obj) {
 			if (obj.value.trim().length >= obj.attributes["minlength"].value) {
@@ -199,8 +220,30 @@
 				obj.parentNode.className = "form-group has-error";
 			}
 	}
+
+	function validateChar(obj) {
+			obj.value = obj.value.replace(/[^0-9a-z]/gi, '');
+		}
+		
+	function Reset() {
+			document.getElementById("alert_success").style.display = 'none';
+			document.getElementById("alert_error").style.display = 'none';
+			document.getElementById("alert_dns_name_suffix").style.display = 'none';
+			document.getElementById("alert_aks_service").style.display = 'none';
+			document.getElementById("alert_app_name").style.display = 'none';
+			document.getElementById("alert_resource_group").style.display = 'none';
+			
+			document.getElementById("dns_name_suffix").parentNode.className = "form-group";
+			document.getElementById("aks_service").parentNode.className = "form-group";
+			document.getElementById("alert_app_name").parentNode.className = "form-group";
+			document.getElementById("resource_group").parentNode.className = "form-group";
+		}
 		
 	function ExecShell() {
+
+			document.getElementById("alert_success").style.display = 'none';
+			document.getElementById("alert_error").style.display = 'none';
+			document.getElementById("command-output").value = '';
 
 			resource_group = document.getElementById("resource_group").value;
 			aks_name = document.getElementById("aks_name").value;
