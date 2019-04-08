@@ -7,7 +7,7 @@
 //
 
 function appendOutput(msg) { getCommandOutput().value += (msg+'\n'); };
-function setStatus(msg)    { getStatus().innerHTML = msg; };
+function setStatus(msg)    { getStatus(msg); };
 
 function backgroundProcess(resource_group, aks_name, app_name, aks_service, dns_name_suffix, aks_location, aks_files) {
     const process = require('child_process');   // The power of Node.JS

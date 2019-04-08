@@ -63,12 +63,13 @@ if [[ "$(kubectl get svc --namespace default kubernetes -o jsonpath='{.metadata.
     nohup /usr/local/bin/kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard &>/dev/null &
 fi
 echo "-----------------------------------"
+echo "Checking Manifest files..."
 SAVEIFS="$IFS"
 IFS=$(echo -en "\n\b")
 eval "arr=($aks_files)"
 for i in "${arr[@]}"; do
     #echo "Apply $i"
-    /usr/local/bin/kubectl apply -f "$i"  || exit 1
+    /usr/local/bin/kubectl apply -f "$i"
 done
 IFS="$SAVEIFS"
 echo "-----------------------------------"
@@ -92,8 +93,8 @@ function assign_dns {
         exit 1
     fi
 
-    echo -n "Assign DNS name '$dns_name' for '$aks_service'...wait..."
-    az network public-ip update --dns-name "$dns_name" --ids "$public_ip" || exit 1
+    echo -n "Assign DNS name '$dns_name' for '$aks_service'... wait..."
+    az network public-ip update --dns-name "$dns_name" --ids "$public_ip"
     [[ $? != 0 ]] && exit 1
 }
 temp_dns_assign="$app_name-$dns_name_suffix"
@@ -107,6 +108,8 @@ echo " '${urlapi// /}' "
 sleep 10
 echo "-----------------------------------"
 echo "Browsing Dashboard Kubernetes..."
-nohup az aks browse --resource-group $resource_group --name $aks_name &
+#az aks browse --resource-group $resource_group --name $aks_name &
+#sleep 20
 echo "-----------------------------------"
 echo "Finished!"
+#exit 0
