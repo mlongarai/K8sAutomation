@@ -12,12 +12,12 @@
   },
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
-    "rebuild": "electron-rebuild",
-    "clean": "rimraf dist && mkdirp dist",
-    "dist": "build --mac -p always",
-    "app": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=icon.icns --prune=true --out=dist",
-    "dmg": "electron-installer-dmg ./K8sAutomation-darwin-x64/K8sAutomation.app K8sAutomation --out=dist"
+    "postinstall": "electron-builder install-app-deps",
+    "start": "yarn install && yarn compile && electron ./app",
+    "compile": "rimraf app/out && tsc",
+    "pack": "yarn compile && electron-builder --dir",
+    "dist": "yarn compile && electron-builder",
+    "release": "yarn compile && electron-builder"
   },
   "keywords": [
     "electron",
