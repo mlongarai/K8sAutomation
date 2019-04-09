@@ -15,8 +15,7 @@
     "start": "electron .",
     "rebuild": "electron-rebuild",
     "clean": "rimraf dist && mkdirp dist",
-    "build:mac": "./node_modules/.bin/build -m",
-    "dist": "build:mac",
+    "dist": "./node_modules/.bin/build -m",
     "app": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=icon.icns --prune=true --out=dist",
     "dmg": "electron-installer-dmg ./K8sAutomation-darwin-x64/K8sAutomation.app K8sAutomation --out=dist"
   },

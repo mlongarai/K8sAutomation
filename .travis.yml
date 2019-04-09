@@ -24,7 +24,6 @@ install:
 after_success:
   - sh set_tags.sh
   - npm run dist
-  #- npm run dmg
 
 notifications:
   email: false
