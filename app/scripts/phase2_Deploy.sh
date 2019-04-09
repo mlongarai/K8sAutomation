@@ -97,6 +97,7 @@ function assign_dns {
     fi
     
     echo -n "Assign DNS name '$dns_name' for '$aks_service'... Wait..."
+    echo " "
     az network public-ip update --dns-name "$dns_name" --ids "$public_ip" >/dev/null
     [[ $? != 0 ]] && exit 1
     echo -n "Assigned!"
@@ -109,5 +110,8 @@ echo "-----------------------------------"
 urlapi="http://$temp_dns_assign.eastus.cloudapp.azure.com"
 echo "Copy URL page AND access WITH your PORT exposed"
 echo " '${urlapi// /}' "
+echo " "
+echo " "
+echo " "
 sleep 10
 echo "Finished!"

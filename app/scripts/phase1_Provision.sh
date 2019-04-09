@@ -65,7 +65,7 @@ if [[ "$(az acr show --name $registry_name --resource-group $resource_group --qu
       az acr create --resource-group $resource_group --name $registry_name --sku Basic  || exit 1
       sleep 10
 fi
-echo -n "-----------------------------------"
+echo "-----------------------------------"
 echo -n "Checking Azure Kubernetes Service for $aks_name..."
 if [[ "$(az aks show -g $resource_group -n $aks_name --query 'provisioningState' --output tsv)" == "Succeeded" ]]; then
     echo "$aks_name already exist."

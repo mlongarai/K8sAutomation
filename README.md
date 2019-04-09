@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.com/mlongarai/K8sAutomation.svg?branch=master)](https://travis-ci.com/mlongarai/K8sAutomation)
 
+![K8sAutomation]()
+
 ## Overview
 
 Simplify building your Azure Kubernetes Service (AKS) cloud infrastructure. Use this app to provision and deploy a kubernetes cluster and and build your microservice architecture quickly and easily.
