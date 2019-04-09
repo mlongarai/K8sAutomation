@@ -7,16 +7,19 @@ os:
 
 after_success:
   - npm run dist
+  - sh set_tags.sh
 
 deploy:
   provider: releases
   skip_cleanup: true
+  tag_name: $TRAVIS_TAG
+  name: K8sAutomation $TRAVIS_TAG
   api_key:
       secure: $GH_TOKEN
   file_glob: true
   file:
     - "README.md"
-    - "dist/K8s*.zip"
-    - "dist/K8s*.dmg"
+    - "dist/K8s*release*.zip"
+    - "dist/K8s*release*.dmg"
   on:
-    tags: false
+    tags: true
