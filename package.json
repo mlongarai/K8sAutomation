@@ -29,19 +29,19 @@
     "appId": "com.k8sautomation.app",
     "icon": "icon.icns",
     "dmg": {
-        "contents": [
-          {
-            "x": 110,
-            "y": 150
-          },
-          {
-            "x": 240,
-            "y": 150,
-            "type": "link",
-            "path": "/Applications"
-          }
-        ]
-      },
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
     "mac": {
       "target": [
         "zip",
@@ -56,17 +56,12 @@
     ]
   },
   "dependencies": {
-    "ajv-keywords": "^3.4.0",
+    "ajv-keywords": "3.4.0",
     "electron-is": "3.0.0",
-    "jquery": "3.3.1",
-    "electron-packager": "^8.1.0",
-    "mkdirp": "^0.5.1",
-    "npm-run-all": "^4.0.2",
-    "rimraf": "^2.6.1"
+    "jquery": "3.3.1"
   },
   "devDependencies": {
     "electron": "^4.1.3",
-    "electron-builder": "20.39.0",
-    "electron-installer-dmg": "2.0.0"
+    "electron-builder": "20.39.0"
   }
 }
