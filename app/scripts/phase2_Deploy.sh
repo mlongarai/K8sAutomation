@@ -36,18 +36,19 @@ then
    echo "Some or all of the parameters are empty";
    helpFunction
 fi
-echo "Checking Azure CLI login..."
-if [ ! az group list >/dev/null 2>&1 ];
-      then
-         echo -n "Enter you login Azure"
-         az login
-         if [ ! az group list >/dev/null 2>&1 ]; 
-            then
-            echo -n "Login Azure CLI required" >&2
-            exit 1
-         fi
-    else
-    echo "Logged on Azure!"
+echo -n "Checking Azure CLI login..."
+function check_azure_login {
+	if [ $(az account show | wc -l) -eq 0 ]; then
+      echo "false";
+	else
+		echo "true";
+	fi;
+}
+if [ "$(check_azure_login)" == "false" ]; then
+      echo "Enter your login Azure"
+      az login;
+   else
+      echo -e "Logged on Azure!"
 fi
 echo "-----------------------------------"
 
@@ -94,10 +95,11 @@ function assign_dns {
         echo -n "Cannot find public IP resource ID for '$aks_service' in companion resource group '$companion_rg'" >&2
         exit 1
     fi
-
-    echo -n "Assign DNS name '$dns_name' for '$aks_service'... wait..."
-    az network public-ip update --dns-name "$dns_name" --ids "$public_ip"
+    
+    echo -n "Assign DNS name '$dns_name' for '$aks_service'... Wait..."
+    az network public-ip update --dns-name "$dns_name" --ids "$public_ip" >/dev/null
     [[ $? != 0 ]] && exit 1
+    echo -n "Assigned!"
 }
 temp_dns_assign="$app_name-$dns_name_suffix"
 thisdns="${temp_dns_assign// /}"

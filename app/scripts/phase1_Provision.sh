@@ -32,18 +32,20 @@ then
    echo -n "Some or all of the parameters are empty";
    helpFunction
 fi
-echo "Checking Azure CLI login..."
-if [ ! az group list >/dev/null 2>&1 ];
-      then
-         echo -n "Enter you login Azure"
-         az login
-         if [ ! az group list >/dev/null 2>&1 ]; 
-            then
-            echo -n "Login Azure CLI required" >&2
-            exit 1
-         fi
-    else
-    echo "Logged on Azure!"
+
+echo -n "Checking Azure CLI login..."
+function check_azure_login {
+	if [ $(az account show | wc -l) -eq 0 ]; then
+      echo "false";
+	else
+		echo "true";
+	fi;
+}
+if [ "$(check_azure_login)" == "false" ]; then
+      echo "Enter your login Azure"
+      az login;
+   else
+      echo "Logged on Azure!"
 fi
 echo "-----------------------------------"
 echo -n "Checking resource group $resource_group..."
@@ -63,7 +65,7 @@ if [[ "$(az acr show --name $registry_name --resource-group $resource_group --qu
       az acr create --resource-group $resource_group --name $registry_name --sku Basic  || exit 1
       sleep 10
 fi
-echo "-----------------------------------"
+echo -n "-----------------------------------"
 echo -n "Checking Azure Kubernetes Service for $aks_name..."
 if [[ "$(az aks show -g $resource_group -n $aks_name --query 'provisioningState' --output tsv)" == "Succeeded" ]]; then
     echo "$aks_name already exist."
