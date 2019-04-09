@@ -20,8 +20,8 @@ cache:
     - $HOME/.npm/_prebuilds
 
 install:
-  - npm install electron-builder@next
-  - npm install electron-packager@next
+  - npm install electron-builder
+  #- npm install electron-packager@next
   - npm i electron-installer-dmg --save-dev
 
 after_success:
