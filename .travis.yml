@@ -29,4 +29,4 @@ install:
 
 script:
 - echo "Deploy mac version to GitHub"
-- yarn release:mac
+- yarn build:mac
