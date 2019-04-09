@@ -8,6 +8,7 @@
 	<link href="css/font-awesome.min.css" rel="stylesheet">
 	<link href="css/datepicker3.css" rel="stylesheet">
 	<link href="css/styles.css" rel="stylesheet">
+	<script src="./gui-funct-invoke-az.js"></script>
 	
 	
 	<!--Custom Font-->
@@ -16,6 +17,19 @@
 	<script src="js/html5shiv.js"></script>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
+
+	<script>
+		function getStatusAz(msg) {
+			if (msg == "Success") {
+				document.getElementById("led_azure").className = "indicator label-success";
+			} else if (msg == "Error") {
+				document.getElementById("led_azure").className = "indicator label-danger";
+			} else {
+				document.getElementById("led_azure").className = "indicator label-warning";
+			}
+		}
+		window.onload = function invokeAz() { backgroundProcessAz(); }
+	</script>
 </head>
 <body>
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
@@ -34,7 +48,7 @@
 		<div class="profile-sidebar">
 			<div class="profile-usertitle">
 				<div class="profile-usertitle-name">Azure Subscription</div>
-				<div class="profile-usertitle-status"><span class="indicator label-success"></span>status</div>
+				<div class="profile-usertitle-status"><span id="led_azure" class="indicator label-default"></span>status</div>
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -110,7 +124,7 @@
 							<form role="form" id="formAks" name="formAks">
 								<div class="form-group">
 									<label>Azure Resource Group</label>
-									<input class="form-control" placeholder="Enter your resource group name" name="resource_group" id="resource_group" minlength="5" maxlength="14" size="10" onchange="validateChar(this)" onkeyup="validateChar(this)" onblur="validate(this)">
+									<input class="form-control" placeholder="Enter your resource group name" name="resource_group" id="resource_group" minlength="5" maxlength="14" size="10" onchange="validateChar(this)" onkeyup="validateChar(this)" onload="validate(this)">
 								</div>
 								<div class="form-group">
 									<label>Kubernetes Cluster</label>

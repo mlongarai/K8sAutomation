@@ -1,9 +1,9 @@
 const { app, BrowserWindow } = require('electron')
+process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = '1';
 const path = require('path')
 const url = require('url')
 const Menu = require('electron').Menu
 
-// global
 let win
 
 function createWindow() {
@@ -24,11 +24,16 @@ function createWindow() {
     win.on('closed', () => {
         win = null
     })
+    
+    // Open the DevTools.
+    win.openDevTools();
 
     createMenu()
 }
 
 app.on('ready', createWindow)
+
+
 
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {

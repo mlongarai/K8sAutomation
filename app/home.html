@@ -9,6 +9,7 @@
 	<link href="css/font-awesome.min.css" rel="stylesheet">
 	<link href="css/datepicker3.css" rel="stylesheet">
 	<link href="css/styles.css" rel="stylesheet">
+	<script src="./gui-funct-invoke-az.js"></script>
 
 	<!--Custom Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i"
@@ -17,6 +18,20 @@
 	<script src="js/html5shiv.js"></script>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
+
+	<script> 
+			function getStatusAz(msg) {
+					if (msg == "Success") {
+						document.getElementById("led_azure").className = "indicator label-success";
+					} else if (msg == "Error") {
+						document.getElementById("led_azure").className = "indicator label-danger";
+					} else {
+						document.getElementById("led_azure").className = "indicator label-warning";
+					}
+				}
+			window.onload = function invokeAz() { backgroundProcessAz(); }
+	</script>
+
 </head>
 
 <body>
@@ -37,7 +52,7 @@
 		<div class="profile-sidebar">
 			<div class="profile-usertitle">
 				<div class="profile-usertitle-name">Azure Subscription</div>
-				<div class="profile-usertitle-status"><span class="indicator label-success"></span>status</div>
+				<div class="profile-usertitle-status"><span id="led_azure" class="indicator label-default"></span>status</div>
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -108,9 +123,24 @@
 	
 	<script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/chart.min.js"></script>
-	<script src="js/chart-data.js"></script>
+	<script src="js/chart-data.js"></script>	
 	
 	<script type="text/javascript">
+		
+		function getStatus(msg) {
+				if (msg == "Success") {
+					document.getElementById("led_azure").className = "indicator label-success";
+				} else if (msg == "Error") {
+					document.getElementById("led_azure").className = "indicator label-danger";
+				} else {
+					document.getElementById("led_azure").className = "indicator label-warning";
+				}
+		}
+		
+		function invokeAz() {
+			backgroundProcess();
+		}
+
 		document.getElementById("provisionButton").onclick = function () {
 			location.href = "provision.html";
 		};
