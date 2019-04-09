@@ -5,10 +5,20 @@ node_js:
 os:
   - osx
 
+before_install:
+  - npm i electron-installer-dmg --save-dev
+
+install: true
+
 after_success:
   - sh set_tags.sh
   - npm run dist
+  - npm run app
+  - npm run dmg
 
+notifications:
+  email: false
+  
 deploy:
   provider: releases
   skip_cleanup: true

@@ -16,7 +16,9 @@
     "rebuild": "electron-rebuild",
     "clean": "rimraf dist && mkdirp dist",
     "build": "./node_modules/.bin/build -m",
-    "dist": "build"
+    "dist": "build",
+    "app": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=icon.icns --prune=true --out=dist",
+    "dmg": "electron-installer-dmg ./K8s Automation-darwin-x64/K8s Automation.app K8s Automation --out=dist"
   },
   "keywords": [
     "electron",
@@ -55,6 +57,7 @@
   },
   "devDependencies": {
     "electron": "^4.1.3",
-    "electron-builder": "20.39.0"
+    "electron-builder": "20.39.0",
+    "electron-installer-dmg": "2.0.0"
   }
 }
