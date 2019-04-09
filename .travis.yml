@@ -26,7 +26,7 @@ install:
 
 after_success:
   - sh set_tags.sh
-  - npm run dist
+  - npm run release
 
 notifications:
   email: false
@@ -37,7 +37,7 @@ branches:
   - /^\d+\.\d+\.\d+$/
 
 deploy:
-  provider: releases
+  provider: github
   skip_cleanup: true
   tag_name: $TRAVIS_TAG
   name: K8sAutomation $TRAVIS_TAG

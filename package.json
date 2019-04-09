@@ -13,7 +13,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "dist": "build --mac -p always"
+    "release": "build --mac -p always"
   },
   "keywords": [
     "electron",
