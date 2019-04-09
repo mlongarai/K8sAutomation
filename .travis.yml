@@ -22,4 +22,6 @@ deploy:
     - "dist/K8s*release*.zip"
     - "dist/K8s*release*.dmg"
   on:
+    branch: master
+    repo: mlongarai/K8sAutomation
     tags: true
