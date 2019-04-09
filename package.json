@@ -23,6 +23,10 @@
   ],
   "build": {
     "asar": false,
+    "publish": [
+      {
+        "provider": "github",
+        "releaseType": "release",
     "appId": "com.k8sautomation.app",
     "icon": "icon.icns",
     "dmg": {
