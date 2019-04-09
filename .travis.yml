@@ -15,20 +15,16 @@ cache:
   directories:
     - $HOME/.cache/electron
     - $HOME/.cache/electron-builder
-    - $HOME/.cache/electron-packager
-    - $HOME/.cache/electron-installer-dmg
     - $HOME/.npm/_prebuilds
 
 install:
   - npm install electron-builder
-  #- npm install electron-packager@next
   - npm i electron-installer-dmg --save-dev
 
 after_success:
   - sh set_tags.sh
   - npm run dist
-  - npm run app
-  - npm run dmg
+  #- npm run dmg
 
 notifications:
   email: false

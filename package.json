@@ -15,8 +15,8 @@
     "start": "electron .",
     "rebuild": "electron-rebuild",
     "clean": "rimraf dist && mkdirp dist",
-    "build": "./node_modules/.bin/build -m",
-    "dist": "build",
+    "build:mac": "./node_modules/.bin/build -m",
+    "dist": "build:mac",
     "app": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=icon.icns --prune=true --out=dist",
     "dmg": "electron-installer-dmg ./K8sAutomation-darwin-x64/K8sAutomation.app K8sAutomation --out=dist"
   },
@@ -30,13 +30,13 @@
     "appId": "com.k8sautomation.app",
     "mac": {
       "category": "public.app-category.productivity",
+      "icon": "/app/assets/icons/icon.icns",
       "publish": [
         "github"
       ],
       "target": [
         "dmg",
-        "zip",
-        "app"
+        "zip"
       ]
     },
     "files": [
