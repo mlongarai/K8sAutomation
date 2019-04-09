@@ -26,6 +26,7 @@
     "shell"
   ],
   "build": {
+    "asar": false,
     "appId": "com.k8sautomation.app",
     "icon": "icon.icns",
     "dmg": {
