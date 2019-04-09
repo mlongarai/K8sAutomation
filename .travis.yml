@@ -7,6 +7,8 @@ os:
 
 after_success:
   - npm run dist
+  - export LAST_GIT_TAG_VERSION=$(git describe --abbrev=0 --tags) && export LAST_GIT_TAG_VERSION=${LAST_GIT_TAG_VERSION:1}
+  - export GIT_TAG_VERSION=$((LAST_GIT_TAG_VERSION+1))
 
 deploy:
   provider: releases
@@ -14,7 +16,9 @@ deploy:
   api_key: $GH_TOKEN
   file_glob: true
   file:
+    - "README.md"
     - "dist/K8s*.zip"
     - "dist/K8s*.dmg"
   on:
     tags: true
+    upload-dir: ${TRAVIS_TAG:1}
