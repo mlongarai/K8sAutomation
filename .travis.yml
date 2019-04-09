@@ -7,3 +7,14 @@ os:
 
 after_success:
   - npm run dist
+
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key: $GH_TOKEN
+  file_glob: true
+  file:
+    - "dist/K8s*.zip"
+    - "dist/K8s*.dmg"
+  on:
+    tags: true
