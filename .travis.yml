@@ -1,42 +1,14 @@
-osx_image: xcode8.3
-
 dist: trusty
-sudo: false
-
 language: node_js
-node_js: 
-  - "8"
-  - "4"
-  - "6.9"
-  - "7.1"
-
-env:
-  global:
-    - ELECTRON_CACHE=$HOME/.cache/electron
-    - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
-
+node_js:
+  - "7"
 os:
   - osx
-
-cache:
-  directories:
-  - node_modules
-  - $HOME/.yarn-cache
-  - $HOME/.cache/electron
-  - $HOME/.cache/electron-builder
-  - $HOME/.npm/_prebuilds
-
-before_install:
-  - npm install -g yarn
-  - export PATH="$HOME/.yarn/bin:$PATH"
-
-install:
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install yarn; fi
-  - yarn
-
-script:
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then yarn release; fi
-
-branches:
-  except:
-    - "/^v\\d+\\.\\d+\\.\\d+$/"
+addons:
+  apt:
+    packages:
+      - icnsutils
+      - graphicsmagick
+      - xz-utils
+after_success:
+  - npm run dist
