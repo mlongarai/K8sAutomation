@@ -15,18 +15,10 @@
     "start": "electron .",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "build": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=icon.icns --prune=true",
-    "build:prod": "npm run build -- -c production", 
-    "electron:linux": "npm run build:prod && npx electron-builder build --linux",
-    "electron:linux:arm": "npm run build:prod && npx electron-builder build --linux --armv7l",
-    "electron:win": "npm run build:prod && npx electron-builder build --windows",
-    "electron:mac": "npm run build:prod && npx electron-builder build --mac",
-    "release": "npm run build:prod && electron-builder build",
-    "release:all": "npm run build:prod && npx electron-builder build -mwl -p always",
-    "release:win": "npm run build:prod && npx electron-builder build --win -p always",
-    "release:mac": "npm run build:prod && npx electron-builder build --mac -p always",
-    "release:linux": "npm run build:prod && npx electron-builder build --linux -p always",
-    "release:linux:arm": "npm run build:prod && npx electron-builder build --linux --armv7l -p always"
+    "build:mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=icon.icns --prune=true",
+    "release:mac": "npm run build:mac --mac -p always",
+    "release:linux": "npx electron-builder build --linux -p always",
+    "release:linux:arm": "npx electron-builder build --linux --armv7l -p always"
   },
   "keywords": [
     "electron",
@@ -57,6 +49,7 @@
   },
   "devDependencies": {
     "electron": "^4.1.3",
-    "electron-builder": "20.39.0"
+    "electron-builder": "20.39.0",
+    "electron-packager": "^8.1.0"
   }
 }
