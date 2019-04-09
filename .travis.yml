@@ -20,5 +20,5 @@ deploy:
     - "dist/K8s*.zip"
     - "dist/K8s*.dmg"
   on:
-    tags: true
+    tags: false
     upload-dir: ${TRAVIS_TAG:1}
