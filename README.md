@@ -1,10 +1,13 @@
 # K8sAutomation 
 
 [![Build Status](https://travis-ci.com/mlongarai/K8sAutomation.svg?branch=master)](https://travis-ci.com/mlongarai/K8sAutomation)
+![Downloads](https://img.shields.io/github/downloads/mlongarai/K8sAutomation/total.svg)
+
+[![License](https://img.shields.io/github/license/mlongarai/K8sAutomation.svg)](https://github.com/mlongarai/K8sAutomation)
 
 ## Overview
 
-Simplify building your Azure Kubernetes Service (AKS) cloud infrastructure. Use this app to provision and deploy a kubernetes cluster and and build your microservice architecture quickly and easily.
+Simplify the build of your Azure Kubernetes Service (AKS) cloud infrastructure. Use this app to provision and deploy a kubernetes cluster and and build your microservice architecture quickly and easily.
 
 This is a desktop app was built with [Electron](http://electronjs.org). This app works only macOS operating system.
 
