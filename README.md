@@ -59,7 +59,7 @@ OR
 
 ### Provisioning
 
-![Provisioning](https://i.imgur.com/u923YSu.png)
+![Provisioning](screenshots/Provision.png)
 
 * Fill out:
 
@@ -81,7 +81,7 @@ You can see all information of provisioning steps on console.
 
 ### Deploying
 
-![Deploying](https://i.imgur.com/irx2NQI.png)
+![Deploying](screenshots/Deploy.png)
 
 For this step you need to use some example like [api-mongodb-jenkins-example](https://github.com/mlongarai/) for deploy pods, services, deployments, etc.
 

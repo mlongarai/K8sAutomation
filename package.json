@@ -1,7 +1,7 @@
 {
   "name": "k8sautomation",
   "productName": "K8s Automation",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "description": "This project proposes to build a set of routines to accelerate the creation of an ecosystem in the flow of software development, enabling the automation of the construction of an initial environment for approval and testing of the project, seeking to facilitate the configuration, management, and monitoring of the environments through Kubernetes, container orchestrator, provides stability, scalability and centralized maintenance.",
   "author": "Murilo Longarai <murilo.longarai@gmail.com>",
@@ -15,7 +15,7 @@
     "start": "electron .",
     "rebuild": "electron-rebuild",
     "clean": "rimraf dist && mkdirp dist",
-    "build": "build --dir",
+    "build": "./node_modules/.bin/build -m",
     "dist": "build"
   },
   "keywords": [
@@ -32,8 +32,9 @@
         "github"
       ],
       "target": [
+        "dmg",
         "zip",
-        "dmg"
+        "app"
       ]
     },
     "files": [
