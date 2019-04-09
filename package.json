@@ -15,10 +15,7 @@
     "start": "electron .",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "build:mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=icon.icns --prune=true",
-    "release:mac": "npm run build:mac --mac -p always",
-    "release:linux": "npx electron-builder build --linux -p always",
-    "release:linux:arm": "npx electron-builder build --linux --armv7l -p always"
+    "release": "yarn compile && electron-builder"
   },
   "keywords": [
     "electron",
