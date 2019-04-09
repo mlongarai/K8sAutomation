@@ -5,10 +5,24 @@ node_js:
 os:
   - osx
 
-before_install:
-  - npm i electron-installer-dmg --save-dev
+env:
+  global:
+    - ELECTRON_CACHE=$HOME/.cache/electron
+    - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
 
-install: true
+cache:
+  yarn: true
+  directories:
+    - $HOME/.cache/electron
+    - $HOME/.cache/electron-builder
+    - $HOME/.cache/electron-packager
+    - $HOME/.cache/electron-installer-dmg
+    - $HOME/.npm/_prebuilds
+
+install:
+  - npm install electron-builder@next
+  - npm install electron-packager@next
+  - npm i electron-installer-dmg --save-dev
 
 after_success:
   - sh set_tags.sh
@@ -18,7 +32,7 @@ after_success:
 
 notifications:
   email: false
-  
+
 deploy:
   provider: releases
   skip_cleanup: true
