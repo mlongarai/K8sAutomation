@@ -13,7 +13,6 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "postinstall": "install-app-deps",
     "rebuild": "electron-rebuild",
     "clean": "rimraf dist && mkdirp dist",
     "build": "build --dir",
