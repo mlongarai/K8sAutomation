@@ -15,7 +15,6 @@
     "start": "electron .",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "clear:temp": "rm -rf dist",
     "build": "ng build",
     "build:dev": "npm run build -- -c dev",
     "build:prod": "npm run build -- -c production", 
@@ -28,7 +27,7 @@
     "release:win": "npm run build:prod && npx electron-builder build --win -p always",
     "release:mac": "npm run build:prod && npx electron-builder build --mac -p always",
     "release:linux": "npm run build:prod && npx electron-builder build --linux -p always",
-    "release:linux:arm": "npm run build:prod && npx electron-builder build --linux --armv7l -p always",
+    "release:linux:arm": "npm run build:prod && npx electron-builder build --linux --armv7l -p always"
   },
   "keywords": [
     "electron",
