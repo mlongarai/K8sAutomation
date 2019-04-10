@@ -19,18 +19,18 @@
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
 
-	<script>
-		function getStatusAz(msg) {
-			if (msg == "Success") {
-				document.getElementById("led_azure").className = "indicator label-success";
-			} else if (msg == "Error") {
-				document.getElementById("led_azure").className = "indicator label-danger";
-			} else {
-				document.getElementById("led_azure").className = "indicator label-warning";
+		<script>
+			function getStatusAz(msg) {
+				if (msg == "Success") {
+					document.getElementById("led_azure").className = "indicator label-success";
+				} else if (msg == "Error") {
+					document.getElementById("led_azure").className = "indicator label-danger";
+				} else {
+					document.getElementById("led_azure").className = "indicator label-warning";
+				}
 			}
-		}
-		window.onload = function invokeAz() { backgroundProcessAz(); }
-	</script>
+			window.onload = function invokeAz() { backgroundProcessAz(); }
+		</script>
 </head>
 
 <body>
@@ -51,7 +51,7 @@
 		<div class="profile-sidebar">
 			<div class="profile-usertitle">
 				<div class="profile-usertitle-name">Azure Subscription</div>
-				<div class="profile-usertitle-status"><span id="led_azure" class="indicator label-default"></span>status</div>
+				<div class="profile-usertitle-status"><span id="led_azure" class="indicator label-danger"></span>status</div>
 			</div>
 			<div class="clear"></div>
 		</div>

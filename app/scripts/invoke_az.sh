@@ -12,7 +12,7 @@ function check_azure_login {
 
 if [ "$(check_azure_login)" == "Error" ]; then
       echo "Error";
-      az login;
+      az login
    else
       echo "Success";
 fi

@@ -17,19 +17,6 @@
 	<script src="js/html5shiv.js"></script>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
-
-	<script>
-		function getStatusAz(msg) {
-			if (msg == "Success") {
-				document.getElementById("led_azure").className = "indicator label-success";
-			} else if (msg == "Error") {
-				document.getElementById("led_azure").className = "indicator label-danger";
-			} else {
-				document.getElementById("led_azure").className = "indicator label-warning";
-			}
-		}
-		window.onload = function invokeAz() { backgroundProcessAz(); }
-	</script>
 </head>
 <body>
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
@@ -48,7 +35,7 @@
 		<div class="profile-sidebar">
 			<div class="profile-usertitle">
 				<div class="profile-usertitle-name">Azure Subscription</div>
-				<div class="profile-usertitle-status"><span id="led_azure" class="indicator label-default"></span>status</div>
+				<div class="profile-usertitle-status"><span id="led_azure" class="indicator label-danger"></span>status</div>
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -107,6 +94,11 @@
 				</div>
 				<div class="alert bg-danger" style="display: none" id="alert_error" role="alert"><em
 						class="fa fa-lg fa-warning">&nbsp;</em> Error: There was some error in the process! Check the log on the console. <a href="#"
+						onclick="javascript:this.parentNode.style.display='none';" class="pull-right"><em
+							class="fa fa-lg fa-close"></em></a>
+				</div>
+				<div class="alert bg-warning" style="display: none" id="alert_azurelogin" role="alert"><em
+						class="fa fa-lg fa-warning">&nbsp;</em> Warning: You aren't allowed until login on Azure. <a href="#"
 						onclick="javascript:this.parentNode.style.display='none';" class="pull-right"><em
 							class="fa fa-lg fa-close"></em></a>
 				</div>
@@ -181,7 +173,7 @@
 									<p class="help-block">YAML and JSON files.</p>
 								</div>
 								<div class="form-group">
-									<button type="button" class="btn btn-primary" onclick="javascript:ExecShell();">Apply</button>
+									<button type="button" id="button_apply" class="btn btn-primary" onclick="javascript:ExecShell();">Apply</button>
 									<button type="reset" class="btn btn-default" onclick="javascript:Reset();">Reset</button>
 								</div>
 								</div>
@@ -210,6 +202,28 @@
 	<script src="./gui-funct-phase2.js"></script>
 
 	<script> 
+		document.getElementById("button_apply").disabled = true;
+		if (document.getElementById("button_apply").disabled = true) {
+			document.getElementById("alert_azurelogin").style.display = 'block';
+		} else {
+			document.getElementById("alert_azurelogin").style.display = 'none';
+		}
+		function getStatusAz(msg) {
+			if (msg == "Success") {
+				document.getElementById("button_apply").disabled = false;
+				document.getElementById("led_azure").className = "indicator label-success";
+				document.getElementById("alert_azurelogin").style.display = 'none'
+			} else if (msg == "Error") {
+				document.getElementById("button_apply").disabled = true;
+				document.getElementById("led_azure").className = "indicator label-danger";
+				document.getElementById("alert_azurelogin").style.display = 'block';
+
+			} else {
+				document.getElementById("led_azure").className = "indicator label-warning";
+				document.getElementById("alert_azurelogin").style.display = 'none';
+			}
+		}
+		window.onload = function invokeAz() { backgroundProcessAz(); }
 	function getCommandOutput() {
 		document.getElementById("command-output").scrollTop = document.getElementById("command-output").scrollHeight;
 		return document.getElementById("command-output");
