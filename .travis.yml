@@ -19,6 +19,8 @@ cache:
 
 install:
   - brew install yarn
+  - npm i -g yarn
+  - yarn
   - npm install electron-builder
   - npm install ajv-keywords
   - npm install jquery
