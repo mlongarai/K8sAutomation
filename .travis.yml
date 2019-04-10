@@ -11,16 +11,13 @@ env:
     - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
 
 cache:
-  yarn: true
   directories:
+    - node_modules
     - $HOME/.cache/electron
     - $HOME/.cache/electron-builder
     - $HOME/.npm/_prebuilds
 
 install:
-  - brew install yarn
-  - npm i -g yarn
-  - yarn
   - npm install electron-builder
   - npm install ajv-keywords
   - npm install jquery

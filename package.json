@@ -12,11 +12,8 @@
   },
   "main": "main.js",
   "scripts": {
-    "start": "yarn install && yarn compile",
-    "compile": "rimraf app/out",
-    "pack": "yarn compile && electron-builder --dir",
-    "dist": "yarn compile && electron-builder",
-    "release": "yarn compile && electron-builder"
+    "start": "electron .",
+    "dist": "build --mac -p always"
   },
   "keywords": [
     "electron",
@@ -64,11 +61,12 @@
   "dependencies": {
     "ajv-keywords": "3.4.0",
     "electron-is": "3.0.0",
+    "electron-is-dev": "1.0.1",
     "jquery": "3.3.1"
   },
   "devDependencies": {
     "electron-builder": "latest",
-    "rimraf": "^2.6.2",
-    "typescript": "^3.1.6"
+    "electron-packager": "latest",
+    "electron": "^4.1.3"
   }
 }
