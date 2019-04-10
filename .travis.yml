@@ -20,7 +20,6 @@ cache:
 install:
   - brew install yarn
   - npm install electron-builder
-  - npm i electron-installer-dmg --save-dev
   - npm install ajv-keywords
   - npm install jquery
   - npm install electron-is
