@@ -1,7 +1,7 @@
 {
   "name": "k8sautomation",
   "productName": "K8s Automation",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "MIT",
   "description": "This project proposes to build a set of routines to accelerate the creation of an ecosystem in the flow of software development, enabling the automation of the construction of an initial environment for approval and testing of the project, seeking to facilitate the configuration, management, and monitoring of the environments through Kubernetes, container orchestrator, provides stability, scalability and centralized maintenance.",
   "author": "Murilo Longarai <murilo.longarai@gmail.com>",
