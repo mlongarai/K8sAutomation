@@ -14,7 +14,7 @@ function backgroundProcess(resource_group, aks_name, app_name, aks_service, dns_
 
   //var cmd = __dirname + '/scripts/' + 'phase2_test.sh';
   var cmd = __dirname + '/scripts/' + 'phase2_Deploy.sh';
-    console.log('cmd:', cmd);
+    //console.log('cmd:', cmd);
   
   var child = process.spawn(cmd, ['-a ' + resource_group, '-b ' + aks_name, '-c ' + app_name, '-d ' + aks_service, '-e ' + dns_name_suffix, '-f ' + aks_location, '-g ' + aks_files]);
 

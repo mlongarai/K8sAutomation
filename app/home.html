@@ -10,6 +10,7 @@
 	<link href="css/datepicker3.css" rel="stylesheet">
 	<link href="css/styles.css" rel="stylesheet">
 	<script src="./gui-funct-invoke-az.js"></script>
+	<script src="./gui-funct-invoke-azlogout.js"></script>
 	<script src="./gui-funct-invoke-azResources.js"></script>
 
 	<style>
@@ -23,12 +24,13 @@
 			right: 0;
 			bottom: 0;
 			background-color: rgba(0, 0, 0, 0.5);
-			z-index: 2;
+			z-index: 9999;
 			cursor: pointer;
 		}
 	
 		#text {
 			position: absolute;
+			text-align: center;
 			top: 50%;
 			left: 50%;
 			font-size: 50px;
@@ -76,11 +78,11 @@
 		
 	</style>
 	<script>
-		function on() {
+		function overlayOn() {
 			document.getElementById("overlay").style.display = "block";
 		}
 
-		function off() {
+		function overlayOff() {
 			document.getElementById("overlay").style.display = "none";
 		}
 	</script>
@@ -107,10 +109,14 @@
 	<link href="https://cdn.materialdesignicons.com/3.0.39/css/materialdesignicons.min.css" rel="stylesheet" />
 	
 </head>
-<body onload="javascript:backgroundProcessAz();backgroundProcessAzResouces();on()">
-		<div id="overlay" onload="on()">
-			<div id="text">You aren't allowed until login on Azure.</div></div>
-		
+<body onload="javascript:backgroundProcessAz();backgroundProcessAzResouces();overlayOn()">
+		<div id="overlay" onload="overlayOn()">
+			<div id="text">Please, login on Azure. 
+				<br>
+				<button type="button" id="button_azlogin" style="display: none; width: 210px; height: 55px; font-size: 18pt" class="btn btn-primary"
+				onclick="javascript:backgroundProcessAz();">Retry</button>
+			</div>
+		</div>
 		<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -120,7 +126,6 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span></button>
 				<a class="navbar-brand" href="#"><span>K8s</span>Automation</a>
-
 			</div>
 		</div><!-- /.container-fluid -->
 	</nav>
@@ -135,14 +140,14 @@
 			<div class="clear"></div>
 		</div>
 		<div class="divider"></div>
-		<ul class="nav menu" id="pointer_menu" style="pointer-events:none">
-			<li class="active"><a href="home.html"><em class="fa fa-home">&nbsp;</em>Home</a></li>
-			<li><a href="provision.html"><em class="fa fa-toggle-off">&nbsp;</em>Provision</a></li>
+		<ul class="nav menu">
+			<li class="active"><a href="home.html"><em class="fa fa-home">&nbsp;</em> Home</a></li>
+			<li><a href="provision.html"><em class="fa fa-toggle-off">&nbsp;</em> Provision</a></li>
 			<li><a href="deploy.html"><em class="fa fa-clone">&nbsp;</em> Deploy</a></li>
 			<li><a href="help.html"><em class="fa fa-life-ring">&nbsp;</em> Help</a></li>
 			<li><a href="about.html"><em class="fa fa-info">&nbsp;</em> About</a></li>
+			<li><a href="#" onclick="javascript:backgroundProcessAzLogout();"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
 		</ul>
-		
 	</div>
 
 	<!--/.sidebar-->
@@ -904,7 +909,96 @@
 																				fill-rule="evenodd" class="jvectormap-region jvectormap-element"></path>
 																		</g>
 																		<g></g>
-																		<g></g>
+																			<g>
+
+																				<circle id="australiaeast" style="display:none" data-index="0" cx="176.02767267033528" cy="99.00788605311405" fill="limegreen" stroke="transparent"
+																					fill-opacity="1" stroke-width="1" stroke-opacity="1" r="5" class="jvectormap-marker jvectormap-element"
+																					cursor="pointer"></circle>
+																			
+																				<circle id="australiasoutheast" style="display:none" data-index="0" cx="176.02767267033528" cy="99.00788605311405"
+																					fill="red" stroke="transparent" fill-opacity="1" stroke-width="1" stroke-opacity="1" r="5"
+																					class="jvectormap-marker jvectormap-element" cursor="pointer"></circle>
+
+																				<circle id="canadacentral" style="display:none" data-index="0" cx="176.02767267033528" cy="99.00788605311405" fill="red"
+																					stroke="transparent" fill-opacity="1" stroke-width="1" stroke-opacity="1" r="5"
+																					class="jvectormap-marker jvectormap-element" cursor="pointer"></circle>
+
+																				<circle id="canadaeast" style="display:none" data-index="0" cx="176.02767267033528" cy="99.00788605311405" fill="red"
+																					stroke="transparent" fill-opacity="1" stroke-width="1" stroke-opacity="1" r="5"
+																					class="jvectormap-marker jvectormap-element" cursor="pointer"></circle>
+
+																				<circle id="centralindia" style="display:none" data-index="0" cx="176.02767267033528" cy="99.00788605311405" fill="red"
+																					stroke="transparent" fill-opacity="1" stroke-width="1" stroke-opacity="1" r="5"
+																					class="jvectormap-marker jvectormap-element" cursor="pointer"></circle>
+
+																				<circle id="centralus" style="display:none" data-index="0" cx="176.02767267033528" cy="99.00788605311405" fill="red"
+																					stroke="transparent" fill-opacity="1" stroke-width="1" stroke-opacity="1" r="5"
+																					class="jvectormap-marker jvectormap-element" cursor="pointer"></circle>
+																				
+																				<circle id="eastasia" style="display:none" data-index="0" cx="176.02767267033528" cy="99.00788605311405" fill="red"
+																					stroke="transparent" fill-opacity="1" stroke-width="1" stroke-opacity="1" r="5"
+																					class="jvectormap-marker jvectormap-element" cursor="pointer"></circle>
+																			
+																				<circle id="eastus" style="display:none" data-index="0" cx="176.02767267033528" cy="99.00788605311405" fill="red"
+																					stroke="transparent" fill-opacity="1" stroke-width="1" stroke-opacity="1" r="5"
+																					class="jvectormap-marker jvectormap-element" cursor="pointer"></circle>
+																				
+																				<circle id="eastus2" style="display:none" data-index="0" cx="176.02767267033528" cy="99.00788605311405" fill="red"
+																					stroke="transparent" fill-opacity="1" stroke-width="1" stroke-opacity="1" r="5"
+																					class="jvectormap-marker jvectormap-element" cursor="pointer"></circle>
+
+																				<circle id="francecentral" style="display:none" data-index="0" cx="176.02767267033528" cy="99.00788605311405" fill="red"
+																					stroke="transparent" fill-opacity="1" stroke-width="1" stroke-opacity="1" r="5"
+																					class="jvectormap-marker jvectormap-element" cursor="pointer"></circle>
+
+																				<circle id="japaneast" style="display:none" data-index="0" cx="176.02767267033528" cy="99.00788605311405" fill="red"
+																					stroke="transparent" fill-opacity="1" stroke-width="1" stroke-opacity="1" r="5"
+																					class="jvectormap-marker jvectormap-element" cursor="pointer"></circle>
+
+																				<circle id="koreacentral" style="display:none" data-index="0" cx="176.02767267033528" cy="99.00788605311405" fill="red"
+																					stroke="transparent" fill-opacity="1" stroke-width="1" stroke-opacity="1" r="5"
+																					class="jvectormap-marker jvectormap-element" cursor="pointer"></circle>
+
+																				<circle id="koreasouth" style="display:none" data-index="0" cx="176.02767267033528" cy="99.00788605311405" fill="red"
+																					stroke="transparent" fill-opacity="1" stroke-width="1" stroke-opacity="1" r="5"
+																					class="jvectormap-marker jvectormap-element" cursor="pointer"></circle>
+
+																				<circle id="northeurope" style="display:none" data-index="0" cx="176.02767267033528" cy="99.00788605311405" fill="red"
+																					stroke="transparent" fill-opacity="1" stroke-width="1" stroke-opacity="1" r="5"
+																					class="jvectormap-marker jvectormap-element" cursor="pointer"></circle>
+
+																				<circle id="southeastasia" style="display:none" data-index="0" cx="176.02767267033528" cy="99.00788605311405" fill="red"
+																					stroke="transparent" fill-opacity="1" stroke-width="1" stroke-opacity="1" r="5"
+																					class="jvectormap-marker jvectormap-element" cursor="pointer"></circle>
+
+																				<circle id="southcentralus" style="display:none" data-index="0" cx="176.02767267033528" cy="99.00788605311405" fill="red"
+																					stroke="transparent" fill-opacity="1" stroke-width="1" stroke-opacity="1" r="5"
+																					class="jvectormap-marker jvectormap-element" cursor="pointer"></circle>
+																				
+																				<circle id="southindia" style="display:none" data-index="0" cx="176.02767267033528" cy="99.00788605311405"
+																					fill="red" stroke="transparent" fill-opacity="1" stroke-width="1" stroke-opacity="1" r="5"
+																					class="jvectormap-marker jvectormap-element" cursor="pointer"></circle>
+
+																				<circle id="uksouth" style="display:none" data-index="0" cx="176.02767267033528" cy="99.00788605311405"
+																					fill="red" stroke="transparent" fill-opacity="1" stroke-width="1" stroke-opacity="1" r="5"
+																					class="jvectormap-marker jvectormap-element" cursor="pointer"></circle>
+
+																				<circle id="ukwest" style="display:none" data-index="0" cx="176.02767267033528" cy="99.00788605311405"
+																					fill="red" stroke="transparent" fill-opacity="1" stroke-width="1" stroke-opacity="1" r="5"
+																					class="jvectormap-marker jvectormap-element" cursor="pointer"></circle>
+
+																				<circle id="westeurope" style="display:none" data-index="0" cx="176.02767267033528" cy="99.00788605311405"
+																					fill="red" stroke="transparent" fill-opacity="1" stroke-width="1" stroke-opacity="1" r="5"
+																					class="jvectormap-marker jvectormap-element" cursor="pointer"></circle>
+																				
+																				<circle id="westus" style="display:none" data-index="0" cx="176.02767267033528" cy="99.00788605311405"
+																					fill="red" stroke="transparent" fill-opacity="1" stroke-width="1" stroke-opacity="1" r="5"
+																					class="jvectormap-marker jvectormap-element" cursor="pointer"></circle>
+																				
+																				<circle id="westus2" style="display:none" data-index="0" cx="176.02767267033528" cy="99.00788605311405" fill="red"
+																					stroke="transparent" fill-opacity="1" stroke-width="1" stroke-opacity="1" r="5"
+																					class="jvectormap-marker jvectormap-element" cursor="pointer"></circle>
+																			</g>
 																		<g></g>
 																	</svg>
 																	<div class="jvectormap-zoomin">+</div>
@@ -944,15 +1038,14 @@
 	
 		function setStatusAzResouces(msg) {
 				if (msg == "Success") {
-					//document.getElementById("dash_resources").innerHTML = getCommandOutputAzResouces().value.split('undefined', 1)[0];
 					document.getElementById("dash_resources_refresh").className = "large";
-					document.getElementById("dash_resources").innerHTML = getCommandOutputAzResouces().value[9];
+					document.getElementById("dash_resources").innerHTML = getCommandOutputAzResouces().value.split('|')[0];
 					document.getElementById("dash_clusters_refresh").className = "large";
-					document.getElementById("dash_clusters").innerHTML = getCommandOutputAzResouces().value[11];
+					document.getElementById("dash_clusters").innerHTML = getCommandOutputAzResouces().value.split('|')[1];
 					document.getElementById("dash_nodes_refresh").className = "large";
-					document.getElementById("dash_nodes").innerHTML = getCommandOutputAzResouces().value[13];
+					document.getElementById("dash_nodes").innerHTML = getCommandOutputAzResouces().value.split('|')[2];
 					document.getElementById("dash_pods_refresh").className = "large";
-					document.getElementById("dash_pods").innerHTML = getCommandOutputAzResouces().value[15];
+					document.getElementById("dash_pods").innerHTML = getCommandOutputAzResouces().value.split('|')[3];
 				} else {
 					document.getElementById("dash_resources_refresh").className = "large";
 					document.getElementById("dash_resources").innerHTML = "N/A";
@@ -965,21 +1058,28 @@
 				}
 			}
 
+
+		function getStatusAzLogout(msg) {
+				if (msg == "Success") {
+					location.href = "home.html";
+				} else if (msg == "Error") {
+					document.getElementById("led_azure").className = "indicator label-success";
+					document.getElementById("overlay").style.display = "none";
+				} else {
+				}
+			}
 		function getStatusAz(msg) {
 				if (msg == "Success") {
 					document.getElementById("led_azure").className = "indicator label-success";
 					document.getElementById("overlay").style.display = "none";
-					document.getElementById("pointer_menu").style.pointerEvents = "all";
 				} else if (msg == "Error") {
 					document.getElementById("led_azure").className = "indicator label-danger";
 					document.getElementById("overlay").style.display = "block";
-					document.getElementById("pointer_menu").style.pointerEvents = "none";
+					document.getElementById("button_azlogin").style.display = "inline-block";
 				} else {
 					document.getElementById("led_azure").className = "indicator label-warning";
 				}
 			}
-
-		
 
 	</script>
 

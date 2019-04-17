@@ -1,6 +1,5 @@
 const { app, BrowserWindow } = require('electron')
 process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = '1';
-process.env.NODE_IGNORE_UNDEFINED = '1';
 const path = require('path')
 const url = require('url')
 const Menu = require('electron').Menu
@@ -72,6 +71,12 @@ function createMenu() {
     const edit = {
         label: "Edit",
         submenu: [
+            {
+            label: "Refresh Page", 
+            accelerator: "CmdOrCtrl+R",
+            click() {
+                win.reload();},
+            },
             {
                 label: "Undo",
                 accelerator: "CmdOrCtrl+Z",

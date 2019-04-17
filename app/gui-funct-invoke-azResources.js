@@ -6,14 +6,21 @@
 // Win10 with Git-Bash (windows Subsystem for Linux) https://git-scm.com/   https://git-for-windows.github.io/
 //
 
-function appendOutput(msg) { getCommandOutputAzResouces().value += (msg); };
+function appendOutput(msg) { 
+  if (document.getElementById("dash_resources").value) {
+    getCommandOutputAzResouces().value = document.getElementById("dash_resources").value + "|" + msg; 
+  } else {
+    getCommandOutputAzResouces().value = msg; 
+  }
+};
+
+
 function setStatusAzResouces(msg) { getStatusAzResouces(msg); };
 
 function backgroundProcessAzResouces() {
   const process = require('child_process');   // The power of Node.JS
   var cmd = __dirname + '/scripts/' + 'invoke_azResources.sh';
-  console.log('cmd:', cmd);
-  //alert("entrou na function!");
+  //console.log('cmd:', cmd);
 
   var child = process.spawn(cmd);
   
@@ -24,7 +31,6 @@ function backgroundProcessAzResouces() {
 
   child.stdout.on('data', function (data) {
     appendOutput(data);
-    console.log('data1:', data);
   });
 
   child.stderr.on('data', function (data) {
@@ -34,10 +40,8 @@ function backgroundProcessAzResouces() {
   child.on('close', function (code) {
     if (code == 0) {
       setStatusAzResouces('Success');
-      //alert("Entrou Sucesso!");
     } else {
       setStatusAzResouces('Error');
-      //alert("Entrou erro!");
     }
   });
 };
