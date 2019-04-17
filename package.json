@@ -62,6 +62,7 @@
     "ajv-keywords": "3.4.0",
     "electron-is": "3.0.0",
     "electron-is-dev": "1.0.1",
+    "jekyll": "3.0.0-beta1",
     "jquery": "3.3.1"
   },
   "devDependencies": {

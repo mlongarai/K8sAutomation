@@ -1,7 +1,7 @@
 #!/bin/bash
 export PATH="$PATH:/usr/local/bin/"
 source ~/.bash_profile
-
+az extension add --name resource-graph
 function check_azure_login {
 	if [ $(az account show | wc -l) -eq 0 ]; then
 		echo "Error";

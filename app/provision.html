@@ -21,7 +21,7 @@
 
 	</script>
 </head>
-<body>
+<body onload="javascript:backgroundProcessAz()">
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -86,10 +86,6 @@
 				<div class="alert bg-danger" style="display: none" id="alert_error" role="alert"><em
 						class="fa fa-lg fa-warning">&nbsp;</em> Error: There was some error in the process! Check the log on the console. <a href="#"
 						onclick="javascript:this.parentNode.style.display='none';" class="pull-right"><em
-							class="fa fa-lg fa-close"></em></a>
-				</div>
-				<div class="alert bg-warning" style="display: none" id="alert_azurelogin" role="alert"><em
-						class="fa fa-lg fa-warning">&nbsp;</em> Warning: You aren't allowed until login on Azure. <a href="#" onclick="javascript:this.parentNode.style.display='none';" class="pull-right"><em
 							class="fa fa-lg fa-close"></em></a>
 				</div>
 			</div>
@@ -208,18 +204,14 @@
 					if (msg == "Success") {
 						document.getElementById("button_apply").disabled = false;
 						document.getElementById("led_azure").className = "indicator label-success";
-						document.getElementById("alert_azurelogin").style.display = 'none'
 					} else if (msg == "Error") {
 						document.getElementById("button_apply").disabled = true;
 						document.getElementById("led_azure").className = "indicator label-danger";
-						document.getElementById("alert_azurelogin").style.display = 'block';
 						
 					} else {
 						document.getElementById("led_azure").className = "indicator label-warning";
-						document.getElementById("alert_azurelogin").style.display = 'none';
 					}
 				}
-	window.onload = function invokeAz() { backgroundProcessAz(); }
 
 	function getCommandOutput() {
 		document.getElementById("command-output").scrollTop = document.getElementById("command-output").scrollHeight;
