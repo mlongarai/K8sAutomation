@@ -1067,11 +1067,14 @@
 					document.getElementById("overlay").style.display = "none";
 				} else {
 				}
+				
 			}
 		function getStatusAz(msg) {
 				if (msg == "Success") {
 					document.getElementById("led_azure").className = "indicator label-success";
 					document.getElementById("overlay").style.display = "none";
+					delete (getCommandOutputAzResouces().value);
+					backgroundProcessAzResouces();
 				} else if (msg == "Error") {
 					document.getElementById("led_azure").className = "indicator label-danger";
 					document.getElementById("overlay").style.display = "block";
@@ -1079,6 +1082,7 @@
 				} else {
 					document.getElementById("led_azure").className = "indicator label-warning";
 				}
+				
 			}
 
 	</script>

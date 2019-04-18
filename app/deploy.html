@@ -9,7 +9,7 @@
 	<link href="css/datepicker3.css" rel="stylesheet">
 	<link href="css/styles.css" rel="stylesheet">
 	<script src="./gui-funct-invoke-az.js"></script>
-	
+	<script src="./gui-funct-invoke-azlogout.js"></script>
 	
 	<!--Custom Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -47,6 +47,7 @@
 			<li class="active"><a href="deploy.html"><em class="fa fa-clone">&nbsp;</em> Deploy</a></li>
 			<li><a href="help.html"><em class="fa fa-life-ring">&nbsp;</em> Help</a></li>
 			<li><a href="about.html"><em class="fa fa-info">&nbsp;</em> About</a></li>
+			<li><a href="#" onclick="javascript:backgroundProcessAzLogout();"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
 		</ul>
 	</div><!--/.sidebar-->
 		
@@ -228,6 +229,15 @@
 			}
 		}
 
+			function getStatusAzLogout(msg) {
+					if (msg == "Success") {
+						location.href = "home.html";
+					} else if (msg == "Error") {
+						document.getElementById("led_azure").className = "indicator label-success";
+						document.getElementById("overlay").style.display = "none";
+					} else {
+					}
+				}	
 	function validate(obj) {
 			if (obj.value.trim().length >= obj.attributes["minlength"].value) {
 				obj.parentNode.className = "form-group has-success";
