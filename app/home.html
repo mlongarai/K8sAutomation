@@ -12,6 +12,7 @@
 	<script src="./gui-funct-invoke-az.js"></script>
 	<script src="./gui-funct-invoke-azlogout.js"></script>
 	<script src="./gui-funct-invoke-azResources.js"></script>
+	<script src="./gui-funct-invoke-azLocation.js"></script>
 
 	<style>
 		#overlay {
@@ -109,7 +110,7 @@
 	<link href="https://cdn.materialdesignicons.com/3.0.39/css/materialdesignicons.min.css" rel="stylesheet" />
 	
 </head>
-<body onload="javascript:backgroundProcessAz();backgroundProcessAzResouces();overlayOn()">
+<body onload="javascript:backgroundProcessAz();backgroundProcessAzResouces();backgroundProcessAzLocation();overlayOn()">
 		<div id="overlay" onload="overlayOn()">
 			<div id="text">Please, login on Azure. 
 				<br>
@@ -1084,6 +1085,26 @@
 				}
 				
 			}
+		
+		function getCommandOutputAzLocation() { return document.getElementById("eastus"); };
+
+		function setStatusAzLocation(msg_location) {
+			var locations = JSON.parse(getCommandOutputAzLocation().value);
+			alert(locations['location'])
+
+			//var data = msg_location;
+			//var parsedData = JSON.parse(data);
+			//alert(parsedData.count_);
+			//alert(parsedData.location);
+			
+				if (msg_location == "Success") {
+					
+				} else {
+					
+				}
+			}
+
+		
 
 	</script>
 
