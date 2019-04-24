@@ -5,17 +5,24 @@
 //   
 // Win10 with Git-Bash (windows Subsystem for Linux) https://git-scm.com/   https://git-for-windows.github.io/
 //
+
 function appendOutputLocation(msg_location) {
-  if (document.getElementById("eastus").value) {
-    getCommandOutputAzLocation().value = document.getElementById("eastus").value + msg_location;
-  } else {
-    getCommandOutputAzLocation().value += msg_location;
+  if (msg_location != "Error" || msg_location.toString().substring(0,5) != "stderr"){
+  var locations = JSON.parse(msg_location);
+  for (i = 0; i < locations.length; i++) {
+    switch (locations[i]['location']) {
+      case "eastus":
+        document.getElementById("eastus").style.display = "block";
+        break;
+    
+      case "southcentralus":
+        document.getElementById("southcentralus").style.display = "block";
+        break;
+    }
   }
-  alert(getCommandOutputAzLocation().value);
+}  
 };
 
-
-function setStatusAzLocation(msg_location) { getStatusAzLocation(msg_location); };
 
 function backgroundProcessAzLocation() {
   const process = require('child_process');   // The power of Node.JS

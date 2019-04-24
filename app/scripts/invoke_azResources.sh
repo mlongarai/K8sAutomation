@@ -15,14 +15,15 @@ if [ "$(check_azure_login)" == "Error" ]; then
 	exit 1
    else	
 	#Count Resources
-      az group list | grep -rcZ "name" | awk -F'\0' '{s+=$NF}END{print s}'
+      #az group list | grep -rcZ "name" | awk -F'\0' '{s+=$NF}END{print s}'
+	az group list | grep -rcZ "name" | awk -F'\0' '{s+=$NF}END{print "resources:" s}'
 	
 	#Count Clusters
-	az aks list | grep -rcZ "Microsoft.ContainerService/ManagedClusters" | awk -F'\0' '{s+=$NF}END{print s}'
+	az aks list | grep -rcZ "Microsoft.ContainerService/ManagedClusters" | awk -F'\0' '{s+=$NF}END{print "clusters:" s}'
 	
 	#Count Nodes
-	az graph query -q "where type =~ 'Microsoft.Compute/virtualMachines'" | grep -rcZ "microsoft-aks" | awk -F'\0' '{s+=$NF}END{print s}'
+	az graph query -q "where type =~ 'Microsoft.Compute/virtualMachines'" | grep -rcZ "microsoft-aks" | awk -F'\0' '{s+=$NF}END{print "nodes:" s}'
 	
 	#Count Pods
-	kubectl describe pods | grep -rcZ "Namespace" |awk -F'\0' '{s+=$NF}END{print s}'
+	kubectl describe pods | grep -rcZ "Namespace" |awk -F'\0' '{s+=$NF}END{print "pods:" s}'
 fi

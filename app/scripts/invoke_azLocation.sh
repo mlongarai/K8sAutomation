@@ -14,6 +14,7 @@ if [ "$(check_azure_login)" == "Error" ]; then
       echo "Error";
 	exit 1
    else
+	echo "[{\"count_\": 2,\"location\": \"eastus\"},{\"count_\": 5,\"location\": \"southcentralus\"}]"
 	#Count by location
-	az graph query -q "where type =~ 'Microsoft.Compute/virtualMachines' | summarize count() by location"
+	#az graph query -q "where type =~ 'Microsoft.Compute/virtualMachines' | summarize count() by location"
 fi

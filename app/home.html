@@ -972,7 +972,7 @@
 																					stroke="transparent" fill-opacity="1" stroke-width="1" stroke-opacity="1" r="5"
 																					class="jvectormap-marker jvectormap-element" cursor="pointer"></circle>
 
-																				<circle id="southcentralus" style="display:none" data-index="0" cx="176.02767267033528" cy="99.00788605311405" fill="red"
+																				<circle id="southcentralus" style="display:none" data-index="0" cx="180.02767267033528" cy="99.00788605311405" fill="blue"
 																					stroke="transparent" fill-opacity="1" stroke-width="1" stroke-opacity="1" r="5"
 																					class="jvectormap-marker jvectormap-element" cursor="pointer"></circle>
 																				
@@ -1030,23 +1030,18 @@
 	
 	<script type="text/javascript">
 		
-		document.getElementById("dash_resources_refresh").className = "fa fa-refresh fa-spin";
-		document.getElementById("dash_clusters_refresh").className = "fa fa-refresh fa-spin";
-		document.getElementById("dash_nodes_refresh").className = "fa fa-refresh fa-spin";
-		document.getElementById("dash_pods_refresh").className = "fa fa-refresh fa-spin";
-
 		function getCommandOutputAzResouces() { return document.getElementById("dash_resources"); };
 	
 		function setStatusAzResouces(msg) {
 				if (msg == "Success") {
 					document.getElementById("dash_resources_refresh").className = "large";
-					document.getElementById("dash_resources").innerHTML = getCommandOutputAzResouces().value.split('|')[0];
+					//document.getElementById("dash_resources").innerHTML = getCommandOutputAzResouces().value.resoures;
 					document.getElementById("dash_clusters_refresh").className = "large";
-					document.getElementById("dash_clusters").innerHTML = getCommandOutputAzResouces().value.split('|')[1];
+					//document.getElementById("dash_clusters").innerHTML = getCommandOutputAzResouces().value.clusters;
 					document.getElementById("dash_nodes_refresh").className = "large";
-					document.getElementById("dash_nodes").innerHTML = getCommandOutputAzResouces().value.split('|')[2];
+					//document.getElementById("dash_nodes").innerHTML = getCommandOutputAzResouces().value.nodes;
 					document.getElementById("dash_pods_refresh").className = "large";
-					document.getElementById("dash_pods").innerHTML = getCommandOutputAzResouces().value.split('|')[3];
+					//document.getElementById("dash_pods").innerHTML = getCommandOutputAzResouces().value.pods;
 				} else {
 					document.getElementById("dash_resources_refresh").className = "large";
 					document.getElementById("dash_resources").innerHTML = "N/A";
@@ -1065,7 +1060,7 @@
 					location.href = "home.html";
 				} else if (msg == "Error") {
 					document.getElementById("led_azure").className = "indicator label-success";
-					document.getElementById("overlay").style.display = "none";
+					overlayOff();
 				} else {
 				}
 				
@@ -1073,12 +1068,12 @@
 		function getStatusAz(msg) {
 				if (msg == "Success") {
 					document.getElementById("led_azure").className = "indicator label-success";
-					document.getElementById("overlay").style.display = "none";
+					overlayOff();
 					delete (getCommandOutputAzResouces().value);
 					backgroundProcessAzResouces();
 				} else if (msg == "Error") {
 					document.getElementById("led_azure").className = "indicator label-danger";
-					document.getElementById("overlay").style.display = "block";
+					overlayOn();
 					document.getElementById("button_azlogin").style.display = "inline-block";
 				} else {
 					document.getElementById("led_azure").className = "indicator label-warning";
@@ -1089,19 +1084,7 @@
 		function getCommandOutputAzLocation() { return document.getElementById("eastus"); };
 
 		function setStatusAzLocation(msg_location) {
-			var locations = JSON.parse(getCommandOutputAzLocation().value);
-			alert(locations['location'])
-
-			//var data = msg_location;
-			//var parsedData = JSON.parse(data);
-			//alert(parsedData.count_);
-			//alert(parsedData.location);
 			
-				if (msg_location == "Success") {
-					
-				} else {
-					
-				}
 			}
 
 		
