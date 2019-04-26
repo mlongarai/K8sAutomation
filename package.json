@@ -64,7 +64,7 @@
     "electron-is-dev": "1.0.1",
     "iohook": "0.4.4",
     "jekyll": "3.0.0-beta1",
-    "jquery": "3.3.1"
+    "jquery": "3.4.0"
   },
   "devDependencies": {
     "electron-builder": "latest",
