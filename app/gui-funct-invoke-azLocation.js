@@ -66,6 +66,10 @@ function appendOutputLocation(msg_location) {
       case "northeurope":
         document.getElementById("northeurope").style.display = "block";
         break;
+      
+      case "southeastasia":
+        document.getElementById("southeastasia").style.display = "block";
+        break;
 
       case "southcentralus":
         document.getElementById("southcentralus").style.display = "block";
