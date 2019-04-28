@@ -1170,19 +1170,16 @@
 														</div>
 																	
 																<!-- /.MAP END -->
-
 						</div>
-
-				<br>
-				
 		</div><!-- /.row -->
 			<div id="vmap" style="width: 600px; height: 400px;"></div>
-			<div class="col-sm-12">
-				<p class="back-link">Copyright (c) 2019, Murilo Longarai</a></p>
-				<p class="back-link">Lumino Theme by <a target="_blank" href="https://www.medialoot.com">Medialoot</a></p>
-			</div>
 		</div><!--/.row-->
 	</div><!--/.main-->
+
+	<div class="col-sm-12">
+		<p class="back-link">Copyright (c) 2019, Murilo Longarai</a></p>
+		<p class="back-link">Lumino Theme by <a target="_blank" href="https://www.medialoot.com">Medialoot</a></p>
+	</div>
 	
 	<script src="js/chart.min.js"></script>
 	<script src="js/chart-data.js"></script>	
@@ -1223,6 +1220,7 @@
 					overlayOff();
 					delete (getCommandOutputAzResouces().value);
 					backgroundProcessAzResouces();
+					backgroundProcessAzLocation();
 				} else if (msg == "Error") {
 					document.getElementById("led_azure").className = "indicator label-danger";
 					overlayOn();
