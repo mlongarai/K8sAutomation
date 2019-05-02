@@ -115,7 +115,7 @@ You can see all information of deploying steps on console.
 
 ### Examples of K8s architecture scenarios
 
-* [api-mongodb-jenkins-example](https://github.com/mlongarai/): API for Documentation using Node.js + MongoDB + Jenkins for CI/CD
+* [api-mongodb-jenkins-example](https://github.com/mlongarai/api-mongodb-jenkins-example): API for Documentation using Node.js + MongoDB + Jenkins for CI/CD
 
 
 ### Terminal Experts
