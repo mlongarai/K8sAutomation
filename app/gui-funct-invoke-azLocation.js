@@ -1,11 +1,3 @@
-// Mac and Linux have Bash shell scripts (so the following would work)
-//        var child = process.spawn('child', ['-l']);
-//        var child = process.spawn('./test.sh');       
-// Win10 with WSL (Windows Subsystem for Linux)  https://docs.microsoft.com/en-us/windows/wsl/install-win10
-//   
-// Win10 with Git-Bash (windows Subsystem for Linux) https://git-scm.com/   https://git-for-windows.github.io/
-//
-
 function appendOutputLocation(msg_location) {
   if (msg_location != "Error" || msg_location.toString().substring(0,5) != "stderr"){
   var locations = JSON.parse(msg_location);
