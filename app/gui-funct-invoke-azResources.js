@@ -33,10 +33,10 @@ function setStatusAzResouces(msg) { getStatusAzResouces(msg); };
 
 function backgroundProcessAzResouces() {
   
-  document.getElementById("dash_resources_refresh").className = "fa fa-refresh fa-spin";
-  document.getElementById("dash_clusters_refresh").className = "fa fa-refresh fa-spin";
-  document.getElementById("dash_nodes_refresh").className = "fa fa-refresh fa-spin";
-  document.getElementById("dash_pods_refresh").className = "fa fa-refresh fa-spin";
+  document.getElementById("dash_resources_refresh").className = "fa fa-spinner fa-pulse";
+  document.getElementById("dash_clusters_refresh").className = "fa fa-spinner fa-pulse";
+  document.getElementById("dash_nodes_refresh").className = "fa fa-spinner fa-pulse";
+  document.getElementById("dash_pods_refresh").className = "fa fa-spinner fa-pulse";
   
   var obj = {
     resources: 0,

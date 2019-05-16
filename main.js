@@ -112,11 +112,9 @@ function createMenu() {
             }
         ]
     }
-
     const template = [
         application,
         edit
     ]
-
     Menu.setApplicationMenu(Menu.buildFromTemplate(template))
 }
