@@ -5,24 +5,12 @@ node_js:
 os:
   - osx
 
-env:
-  global:
-    - ELECTRON_CACHE=$HOME/.cache/electron
-    - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
-
 cache:
   directories:
     - node_modules
-    - $HOME/.cache/electron
-    - $HOME/.cache/electron-builder
-    - $HOME/.npm/_prebuilds
 
 install:
   - npm install yarn
-  - npm install electron-builder
-  - npm install ajv-keywords
-  - npm install jquery
-  - npm install electron-is
   - yarn add electron-builder --dev
 
 after_success:
