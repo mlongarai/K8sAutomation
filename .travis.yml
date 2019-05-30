@@ -11,6 +11,7 @@ addons:
   chrome: stable
 
 cache:
+  yarn: true
   directories:
     - node_modules
 
@@ -20,7 +21,12 @@ install:
 
 after_success:
   - sh set_tags.sh
+  - yarn run test
   - yarn pack
+
+script:
+  - echo "Deploy mac version to GitHub"
+  - if [[ "$TRAVIS_BRANCH" == "master" ]] && [[ "$TRAVIS_OS_NAME" == "osx" ]]; then yarn pack; fi
 
 notifications:
   email: false
