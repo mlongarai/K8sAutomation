@@ -13,7 +13,8 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "dist": "build --mac -p always"
+    "dist": "build --mac -p always",
+    "pack": "build --mac -p always --overwrite --platform=darwin --arch=x64 --icon=icon.icns --prune=true --out=dist" 
   },
   "keywords": [
     "electron",
@@ -67,8 +68,8 @@
     "jquery": "3.4.0"
   },
   "devDependencies": {
-    "electron-builder": "latest",
-    "electron-packager": "latest",
-    "electron": "^4.1.3"
+    "electron": "^4.1.3",
+    "electron-builder": "20.41.0",
+    "electron-packager": "13.1.1"
   }
 }
