@@ -18,14 +18,16 @@ cache:
     - $HOME/.npm/_prebuilds
 
 install:
+  - npm install yarn
   - npm install electron-builder
   - npm install ajv-keywords
   - npm install jquery
   - npm install electron-is
+  - yarn add electron-builder --dev
 
 after_success:
   - sh set_tags.sh
-  - npm run dist
+  - yarn pack
 
 notifications:
   email: false
