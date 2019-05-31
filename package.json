@@ -14,7 +14,6 @@
   "scripts": {
     "start": "electron .",
     "dist": "build --mac -p always",
-    "pack": "build --mac -p always --overwrite --platform=darwin --arch=x64 --icon=icon.icns --prune=true --out=dist",
     "test": "jest"
   },
   "keywords": [
