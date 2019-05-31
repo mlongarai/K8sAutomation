@@ -22,11 +22,11 @@ install:
 after_success:
   - sh set_tags.sh
   - yarn run test
-  - yarn pack
+  - yarn dist
 
 script:
   - echo "Deploy mac version to GitHub"
-  - if [[ "$TRAVIS_BRANCH" == "master" ]] && [[ "$TRAVIS_OS_NAME" == "osx" ]]; then yarn pack; fi
+  - if [[ "$TRAVIS_BRANCH" == "master" ]] && [[ "$TRAVIS_OS_NAME" == "osx" ]]; then yarn dist; fi
 
 notifications:
   email: false
