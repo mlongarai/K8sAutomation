@@ -45,7 +45,8 @@ deploy:
     - "dist/mac/K8s*release*.zip"
     - "dist/K8s*release*.dmg"
     - "dist/mac/K8s*release*.dmg"
-  on:
-    branch: master
-    repo: mlongarai/K8sAutomation
-    tags: true
+
+  branches:
+      only:
+      - master
+      - /v\d+\.\d+[a-z]/
