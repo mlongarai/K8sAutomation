@@ -26,7 +26,7 @@ function createWindow() {
     })
     
     // Open the DevTools.
-    win.openDevTools();
+    //win.openDevTools();
 
     createMenu()
 }

@@ -4,6 +4,7 @@ dist/
 DS_Store
 app/.DS_Store
 app/DS_Store
+screenshots/.DS_Store
 *.log
 *.tgz
 *.zip
